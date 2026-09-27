@@ -775,7 +775,7 @@
     if (started) return;
     started = true;
     setSound(false);
-    const target = startIndex();
+    const target = 0;
     if (reduced) {
       gate.hidden = true;
       show(target);
