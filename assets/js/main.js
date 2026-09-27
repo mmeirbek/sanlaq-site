@@ -21,7 +21,7 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
   };
 
-  const allSlides = $$('.slide:not(.slide--optional)');
+  const allSlides = $$('.slide');
   let slides = allSlides;
   let total = slides.length;
   let cur = 0;
@@ -326,7 +326,9 @@
   });
 
   function setAudience(audience) {
-    slides = allSlides.filter((slide) => slide.dataset.audience === 'both' || slide.dataset.audience === audience);
+    slides = audience === 'investor'
+      ? allSlides.filter((slide) => slide.dataset.audience === 'both' || slide.dataset.audience === 'investor')
+      : allSlides.filter((slide) => slide.dataset.audience !== 'investor');
     total = slides.length;
     buildMenu();
     updateNav();
