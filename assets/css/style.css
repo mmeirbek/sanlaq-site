@@ -115,7 +115,7 @@ button:disabled { cursor: default; }
 .split-ready .ch, .split-ready[data-split="words"] .w { opacity: 0; }
 .slide.is-in .split-ready .ch { animation: chIn .42s var(--step) both; animation-delay: calc(var(--d0, 0s) + var(--i) * 14ms); }
 .slide.is-in .split-ready[data-split="words"] .w { animation: chIn .5s var(--step) both; animation-delay: calc(var(--d0, .35s) + var(--i) * 70ms); }
-@keyframes chIn { from { opacity: 0; transform: translateY(.55em) rotate(var(--r, 0deg)); } to { opacity: 1; transform: none; } }
+@keyframes chIn { from { opacity: 0; } to { opacity: 1; } }
 
 .slide [data-reveal] { opacity: 0; }
 .slide.is-in [data-reveal] { animation: rv .5s steps(5) both; animation-delay: var(--rd, .2s); }
