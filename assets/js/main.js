@@ -328,6 +328,8 @@
   function setAudience(audience) {
     slides = allSlides.filter((slide) => slide.dataset.audience === 'both' || slide.dataset.audience === audience);
     total = slides.length;
+    buildMenu();
+    updateNav();
   }
 
   $$('[data-audience]').forEach((button) => button.addEventListener('click', (event) => {
