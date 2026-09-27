@@ -2,12 +2,12 @@
 (() => {
   'use strict';
 
-  // Fill these in to show contact buttons in the "Байланыс" dialog. Empty values are hidden.
+  // Contact buttons in the "Байланыс" dialog and the footer. Empty values are hidden.
   const CONTACTS = {
-    telegram: '',   // e.g. 'https://t.me/sanlaq'
-    instagram: '',  // e.g. 'https://instagram.com/sanlaq.game'
-    whatsapp: '',   // e.g. 'https://wa.me/77000000000'
-    email: ''       // e.g. 'hello@sanlaq.kz'
+    telegram: 'https://t.me/mmeirbek',
+    instagram: 'https://www.instagram.com/sanlaq.kaz/',
+    whatsapp: '',
+    email: 'meirnur22@gmail.com'
   };
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -444,19 +444,27 @@
   });
 
   const contactLinks = $('#contact-links');
+  function contactAnchors(className) {
+    return [['telegram', 'TELEGRAM'], ['whatsapp', 'WHATSAPP'], ['instagram', 'INSTAGRAM'], ['email', 'EMAIL']]
+      .filter(([k]) => CONTACTS[k])
+      .map(([k, label]) => {
+        const a = document.createElement('a');
+        if (className) a.className = className;
+        a.textContent = label;
+        a.href = k === 'email' ? 'mailto:' + CONTACTS[k] : CONTACTS[k];
+        if (k !== 'email') { a.target = '_blank'; a.rel = 'noopener'; }
+        return a;
+      });
+  }
+  // Footer of the last slide: direct links when we have them, otherwise the dialog button.
+  const footLinks = contactAnchors();
+  footLinks.forEach((a) => $('#foot-contacts').appendChild(a));
+  $('#foot-contact-btn').hidden = footLinks.length > 0;
+
   function openContact(tab) {
-    const links = [
-      ['telegram', 'TELEGRAM'], ['whatsapp', 'WHATSAPP'], ['instagram', 'INSTAGRAM'], ['email', 'EMAIL']
-    ].filter(([k]) => CONTACTS[k]);
+    const links = contactAnchors('pb');
     contactLinks.innerHTML = '';
-    links.forEach(([k, label]) => {
-      const a = document.createElement('a');
-      a.className = 'pb';
-      a.textContent = label;
-      a.href = k === 'email' ? 'mailto:' + CONTACTS[k] : CONTACTS[k];
-      if (k !== 'email') { a.target = '_blank'; a.rel = 'noopener'; }
-      contactLinks.appendChild(a);
-    });
+    links.forEach((a) => contactLinks.appendChild(a));
     $('#contact-soon').hidden = links.length > 0;
     setTab(tab || 'player');
     openDialog('contact');

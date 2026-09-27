@@ -408,8 +408,9 @@ button:disabled { cursor: default; }
 .runaway__hint { position: absolute; left: 14px; top: calc(100% + 10px); font: 8px/1 var(--f-px); color: var(--gold); white-space: nowrap; }
 .foot { position: absolute; left: 36px; right: 36px; top: 744px; display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 3px solid rgba(217, 154, 85, .6); padding-top: 14px; font: 9px/1 var(--f-px); }
 .foot__links { display: flex; gap: 28px; }
-.foot button { padding: 6px 0; font: 9px/1 var(--f-px); color: var(--cream); }
-.foot button:hover { color: var(--gold); }
+.foot button, .foot a { padding: 6px 0; font: 9px/1 var(--f-px); color: var(--cream); text-decoration: none; }
+.foot button:hover, .foot a:hover { color: var(--gold); }
+.foot button[hidden] { display: none; }
 
 /* ---------- Bottom bar ---------- */
 .navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; height: var(--nav); padding: 0 32px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; color: var(--cream); transition: color .3s steps(2); }

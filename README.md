@@ -26,8 +26,7 @@ python3 -m http.server 8000
 
 ## Что поменять перед публикацией
 
-- **Контакты.** В начале `assets/js/main.js` есть объект `CONTACTS` (Telegram, WhatsApp, Instagram, email).
-  Пока он пустой, окно «Байланыс» показывает «контакты скоро появятся».
+- **Контакты.** Telegram, Instagram и email указаны в объекте `CONTACTS` в начале `assets/js/main.js`.
 - **Тексты.** Казахский — в `index.html` (атрибуты `data-i18n`), русский и английский — в `assets/js/i18n.js` под тем же ключом.
 
 ## Управление
@@ -37,4 +36,5 @@ python3 -m http.server 8000
 
 ## Публикация на GitHub Pages
 
-Settings → Pages → Deploy from a branch → `main` / `(root)`.
+При push в `main` сайт автоматически публикуется workflow `.github/workflows/deploy-pages.yml`.
+Если GitHub Pages ещё не активирован, откройте Settings → Pages и выберите Source: GitHub Actions.
