@@ -324,6 +324,12 @@
     if (a.dataset.action === 'home') { Audio.sfx('click'); goTo(0); }
   });
 
+  const investorPanel = $('#investor-panel');
+  $$('[data-role="investor"]').forEach((button) => button.addEventListener('click', () => {
+    investorPanel.hidden = !investorPanel.hidden;
+    button.setAttribute('aria-expanded', String(!investorPanel.hidden));
+  }));
+
   /* keyboard */
   document.addEventListener('keydown', (e) => {
     if (!started || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
