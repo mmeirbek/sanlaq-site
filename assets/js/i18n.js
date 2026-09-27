@@ -4,7 +4,7 @@
  * Keys match the data-i18n / data-i18n-aria attributes in the markup. */
 window.SANLAQ_I18N = {
   kk: {
-    titles: ["Бастау", "Мәселе", "Біз сенеміз", "Шешім", "Кейіпкерлер", "Геймплей", "Ұлттық ойындар", "Ойнап үйрен", "От басы", "Дәлел", "Бизнес-модель", "Нарық", "Жол картасы", "Команда", "Инвестиция", "Қосыл"],
+    titles: ["Бастау", "Мәселе", "Біз сенеміз", "Шешім", "Кейіпкерлер", "Геймплей", "Ұлттық ойындар", "Ойнап үйрен", "От басы", "Дәлел", "Бизнес-модель", "Нарық", "Жол картасы", "Команда", "Инвестициялық сұраныс", "Қосыл"],
     "nav.home": "БАСЫНА",
     "nav.soundOff": "Дыбысты өшіру",
     "gate.loaded": "ЖҮКТЕЛДІ",
@@ -29,7 +29,7 @@ window.SANLAQ_I18N = {
   },
 
   ru: {
-    titles: ["Старт", "Проблема", "Мы верим", "Решение", "Герои", "Геймплей", "Национальные игры", "Учись играя", "У костра", "Доказательства", "Бизнес-модель", "Рынок", "Дорожная карта", "Команда", "Инвестиции", "Присоединяйся"],
+    titles: ["Старт", "Проблема", "Мы верим", "Решение", "Герои", "Геймплей", "Национальные игры", "Учись играя", "У костра", "Доказательства", "Бизнес-модель", "Рынок", "Roadmap", "Команда", "Инвестиционный запрос", "Присоединяйся"],
     "nav.prev": "НАЗАД",
     "nav.next": "ДАЛЕЕ",
     "nav.home": "В НАЧАЛО",
@@ -186,7 +186,7 @@ window.SANLAQ_I18N = {
     "m.ratio": "5,8×",
     "s12.p": "Привлечь игрока в 5,8 раза дешевле, чем он приносит.",
 
-    "s13.eyebrow": "ДОРОЖНАЯ КАРТА",
+    "s13.eyebrow": "ROADMAP",
     "s13.title": "Кочевье только началось",
     "r1.d": "3 главы, 4 мини-игры, энциклопедия",
     "r2.n": "Тест",
@@ -202,6 +202,7 @@ window.SANLAQ_I18N = {
     "s14.title": "Команда",
     "s14.hint": "НАВЕДИ КУРСОР — НАСТОЯЩЕЕ ФОТО",
 
+    "s15.eyebrow": "ИНВЕСТИЦИОННЫЙ ЗАПРОС",
     "s15.title": "Что нам нужно",
     "s15.t1": "НА РЕЛИЗ",
     "s15.t2": "ЕЖЕМЕСЯЧНО",
@@ -267,7 +268,7 @@ window.SANLAQ_I18N = {
   },
 
   en: {
-    titles: ["Start", "The problem", "We believe", "The solution", "Heroes", "Gameplay", "National games", "Learn by playing", "By the fire", "Proof", "Business model", "Market", "Roadmap", "Team", "The ask", "Join us"],
+    titles: ["Start", "The problem", "We believe", "The solution", "Heroes", "Gameplay", "National games", "Learn by playing", "By the fire", "Proof", "Business model", "Market", "Roadmap", "Team", "Investment ask", "Join us"],
     "nav.prev": "BACK",
     "nav.next": "NEXT",
     "nav.home": "TO START",
@@ -440,6 +441,7 @@ window.SANLAQ_I18N = {
     "s14.title": "Team",
     "s14.hint": "HOVER TO SEE THE REAL PHOTO",
 
+    "s15.eyebrow": "INVESTMENT ASK",
     "s15.title": "What we need",
     "s15.t1": "FOR RELEASE",
     "s15.t2": "MONTHLY",

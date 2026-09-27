@@ -259,6 +259,7 @@
 
   function updateNav() {
     counter.textContent = String(cur + 1).padStart(2, '0');
+    $('#total').textContent = String(total).padStart(2, '0');
     prevBtn.disabled = cur === 0;
     const last = cur === total - 1;
     $('.nav-next__t', nextBtn).textContent = t(last ? 'nav.home' : 'nav.next');
@@ -268,10 +269,11 @@
   }
 
   function show(i) {
-    slides.forEach((s, k) => {
-      s.classList.toggle('is-active', k === i);
-      s.setAttribute('aria-hidden', String(k !== i));
-      if (k !== i) { s.classList.remove('is-in'); s.inert = true; } else { s.inert = false; }
+    allSlides.forEach((s) => {
+      const active = s === slides[i];
+      s.classList.toggle('is-active', active);
+      s.setAttribute('aria-hidden', String(!active));
+      if (!active) { s.classList.remove('is-in'); s.inert = true; } else { s.inert = false; }
     });
     slides[i].scrollTop = 0;
     cur = i;
@@ -293,15 +295,18 @@
     hooks.leave[slide.id] && hooks.leave[slide.id]();
   }
 
-  async function goTo(i, force) {
-    if (!started) return;
-    i = (i + total) % total;
-    if ((i === cur && !force) || busy) return;
+  async function goTo(i, audience) {
+    if (!started || busy) return;
+    if (!audience) {
+      i = (i + total) % total;
+      if (i === cur) return;
+    }
     busy = true;
     wheelAcc = 0;
     hideScrollNav();
     const dir = i > cur ? 1 : -1;
     leave(cur);
+    if (audience) setAudience(audience);
     if (reduced) {
       show(i);
       enter(i);
@@ -322,25 +327,23 @@
     const a = e.target.closest('[data-action]');
     if (!a) return;
     if (a.dataset.action === 'next') { Audio.sfx('click'); next(); }
-    if (a.dataset.action === 'home') { Audio.sfx('click'); goTo(0); }
+    if (a.dataset.action === 'home') { Audio.sfx('click'); goTo(0, 'all'); }
   });
 
   function setAudience(audience) {
     slides = audience === 'investor'
       ? allSlides.filter((slide) => slide.dataset.audience === 'investor')
-      : allSlides.filter((slide) => slide.dataset.audience !== 'investor');
+      : audience === 'player'
+        ? allSlides.filter((slide) => slide.dataset.audience !== 'investor')
+        : allSlides;
     total = slides.length;
     buildMenu();
-    updateNav();
   }
 
-  $$('[data-audience]').forEach((button) => button.addEventListener('click', (event) => {
+  $$('button[data-audience]').forEach((button) => button.addEventListener('click', (event) => {
     event.preventDefault();
     const audience = button.dataset.audience;
-    setAudience(audience);
-    const targetId = audience === 'investor' ? 's11' : 's2';
-    const target = slides.findIndex((slide) => slide.id === targetId);
-    if (target >= 0) goTo(target, true);
+    goTo(audience === 'investor' ? 0 : 1, audience);
   }));
 
   /* keyboard */
