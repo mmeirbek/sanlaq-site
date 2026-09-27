@@ -327,7 +327,7 @@
 
   function setAudience(audience) {
     slides = audience === 'investor'
-      ? allSlides.filter((slide) => slide.dataset.audience === 'both' || slide.dataset.audience === 'investor')
+      ? allSlides.filter((slide) => slide.dataset.audience === 'investor')
       : allSlides.filter((slide) => slide.dataset.audience !== 'investor');
     total = slides.length;
     buildMenu();
@@ -338,7 +338,7 @@
     event.preventDefault();
     const audience = button.dataset.audience;
     setAudience(audience);
-    const targetId = 's2';
+    const targetId = audience === 'investor' ? 's11' : 's2';
     const target = slides.findIndex((slide) => slide.id === targetId);
     if (target >= 0) goTo(target);
   }));
