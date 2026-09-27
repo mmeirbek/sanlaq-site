@@ -141,6 +141,7 @@ button:disabled { cursor: default; }
 .role-card__label { font: 10px/1 var(--f-px); color: var(--gold); }
 .role-card strong { font: 800 30px/1 var(--f-disp); text-transform: uppercase; }
 .role-card > span:last-child { font: 20px/1.15 var(--f-body); }
+.role-card em { margin-top: auto; font: 9px/1 var(--f-px); color: var(--gold-hi); font-style: normal; }
 .badge { height: 56px; display: flex; align-items: center; padding: 0 18px; border: 3px dashed var(--gold); font: 11px/1 var(--f-px); background: rgba(53, 23, 19, .55); }
 .slide.is-in .cover__logo img { animation: logoBob 4s steps(4) 1.2s infinite; }
 @keyframes logoBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }

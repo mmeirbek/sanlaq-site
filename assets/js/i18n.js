@@ -57,9 +57,11 @@ window.SANLAQ_I18N = {
     "s1.playerLabel": "ИГРОК",
     "s1.playerTitle": "Об игре",
     "s1.playerText": "История, герои и геймплей.",
+    "s1.playerCta": "СМОТРЕТЬ ВСЕ СТРАНИЦЫ",
     "s1.investorLabel": "ИНВЕСТОР",
     "s1.investorTitle": "О проекте",
     "s1.investorText": "Рынок, модель и рост.",
+    "s1.investorCta": "СМОТРЕТЬ ПИТЧ ПОЛНОСТЬЮ",
 
     "s2.eyebrow": "ПРОБЛЕМА",
     "s2.title": "Казахстанские игры скачивают часто. RPG, которая учит истории Казахстана, — <span class=\"hl\">редкость</span>.",
@@ -293,9 +295,11 @@ window.SANLAQ_I18N = {
     "s1.playerLabel": "PLAYER",
     "s1.playerTitle": "The game",
     "s1.playerText": "Story, heroes and gameplay.",
+    "s1.playerCta": "VIEW ALL PAGES",
     "s1.investorLabel": "INVESTOR",
     "s1.investorTitle": "The project",
     "s1.investorText": "Market, model and growth.",
+    "s1.investorCta": "VIEW FULL PITCH",
 
     "s2.eyebrow": "THE PROBLEM",
     "s2.title": "Kazakh games are downloaded often. An RPG that teaches local history is <span class=\"hl\">rare</span>.",
