@@ -22,7 +22,7 @@
 <body>
 
 <!-- Start gate: preloads the art and gives the browser the click it needs before audio can play -->
-<div class="gate" id="gate">
+<div class="gate" id="gate" hidden>
   <div class="gate__lang lang" aria-label="Тіл / Язык / Language">
     <button type="button" data-lang="kk" class="on">KZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button>
   </div>
@@ -84,7 +84,7 @@
   </section>
 
   <!-- 03 · We believe -->
-  <section class="slide s-believe pat-parch" id="s3" data-title="t3" data-bg="#F7E6D1" data-theme="light" data-music="menu">
+  <section class="slide slide--optional s-believe pat-parch" id="s3" data-title="t3" data-bg="#F7E6D1" data-theme="light" data-music="menu">
     <div class="stage">
       <div class="col center">
         <p class="eyebrow wine" data-i18n="s3.eyebrow" data-reveal>БІЗ СЕНЕМІЗ</p>
@@ -233,7 +233,7 @@
   </section>
 
   <!-- 07 · National games -->
-  <section class="slide s-games pat-parch" id="s7" data-title="t7" data-bg="#F7E6D1" data-theme="light" data-music="aul">
+  <section class="slide slide--optional s-games pat-parch" id="s7" data-title="t7" data-bg="#F7E6D1" data-theme="light" data-music="aul">
     <div class="stage">
       <div class="col center">
         <p class="eyebrow wine" data-i18n="s7.eyebrow" data-reveal>ҰЛТТЫҚ ОЙЫНДАР</p>
@@ -261,7 +261,7 @@
   </section>
 
   <!-- 08 · Learn by playing -->
-  <section class="slide s-learn pat-wine" id="s8" data-title="t8" data-bg="#6D1D17" data-theme="dark" data-music="aul">
+  <section class="slide slide--optional s-learn pat-wine" id="s8" data-title="t8" data-bg="#6D1D17" data-theme="dark" data-music="aul">
     <div class="stage">
       <div class="col center">
         <h2 class="h-display learn__title" data-i18n="s8.title" data-split="chars">Ойнап жүріп үйрен</h2>
@@ -361,7 +361,7 @@
   </section>
 
   <!-- 11 · Business model -->
-  <section class="slide s-biz" id="s11" data-title="t11" data-bg="#351713" data-theme="dark" data-music="battle">
+  <section class="slide slide--optional s-biz" id="s11" data-title="t11" data-bg="#351713" data-theme="dark" data-music="battle">
     <div class="stage">
       <div class="col center">
         <p class="eyebrow gold" data-i18n="s11.eyebrow" data-reveal>БИЗНЕС-МОДЕЛЬ</p>
@@ -395,7 +395,7 @@
   </section>
 
   <!-- 12 · Market -->
-  <section class="slide s-market pat-gold" id="s12" data-title="t12" data-bg="#D99A55" data-theme="light" data-music="battle">
+  <section class="slide slide--optional s-market pat-gold" id="s12" data-title="t12" data-bg="#D99A55" data-theme="light" data-music="battle">
     <div class="stage">
       <div class="mk">
         <div class="mk__left">
@@ -542,7 +542,7 @@
     <button type="button" class="pb nav-next" id="nav-next" data-i18n-aria="nav.next" aria-label="АЛҒА"><span class="nav-next__t" data-i18n="nav.next">АЛҒА</span><svg width="12" height="14" viewBox="0 0 6 7" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M1 0h1v7H1zM2 1h1v5H2zM3 2h1v3H3zM4 3h1v1H4z"/></svg></button>
   </div>
   <div class="navbar__side navbar__side--r">
-    <button type="button" class="snd is-muted" id="sound" aria-pressed="false" data-i18n-aria="nav.soundOn" aria-label="Дыбысты қосу">
+        <button type="button" class="snd is-muted" id="sound" hidden aria-pressed="false" data-i18n-aria="nav.soundOn" aria-label="Дыбысты қосу">
       <svg class="snd__on" width="22" height="18" viewBox="0 0 11 9" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 3h2v3H0zM2 2h1v5H2zM3 1h1v7H3zM4 0h1v9H4zM6 3h1v3H6zM7 1h1v1H7zM7 7h1v1H7zM8 2h1v5H8z"/></svg>
       <svg class="snd__off" width="22" height="18" viewBox="0 0 11 9" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 3h2v3H0zM2 2h1v5H2zM3 1h1v7H3zM4 0h1v9H4zM6 2h1v1H6zM7 3h1v1H7zM8 4h1v1H8zM9 5h1v1H9zM10 6h1v1h-1zM10 2h1v1h-1zM9 3h1v1H9zM7 5h1v1H7zM6 6h1v1H6z"/></svg>
     </button>

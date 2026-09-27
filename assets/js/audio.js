@@ -20,12 +20,8 @@
     battle: { seed: 12, bpm: 132, phrases: [PHRASE_DRIVE, PHRASE_DRIVE, PHRASE_B, PHRASE_DRIVE], gallop: true, gain: 0.62 },
     map: { seed: 13, bpm: 96, phrases: [PHRASE_TRAVEL, PHRASE_A, PHRASE_TRAVEL, PHRASE_B], gallop: true, gain: 0.56 }
   };
-  const FEATURED_MUSIC_URL = 'assets/audio/zhailau-kol-keshteri.mp3?v=b344f71';
-  const FEATURED_MUSIC_VOLUME = 0.25;
-
   let ctx = null;
   let master, musicBus, sfxBus, windBus;
-  let featuredMusic = null;
   let muted = true;
   let current = null;
   let currentName = null;
@@ -214,13 +210,6 @@
     windBus = ctx.createGain();
     windBus.gain.value = 0.08;
     windBus.connect(master);
-    featuredMusic = new Audio(FEATURED_MUSIC_URL);
-    featuredMusic.loop = true;
-    featuredMusic.preload = 'auto';
-    const featuredSource = ctx.createMediaElementSource(featuredMusic);
-    const featuredGain = ctx.createGain();
-    featuredGain.gain.value = FEATURED_MUSIC_VOLUME;
-    featuredSource.connect(featuredGain).connect(master);
     const w = ctx.createBufferSource();
     w.buffer = wind();
     w.loop = true;
@@ -234,12 +223,6 @@
     wanted = name;
     if (!ctx || !name || name === currentName) return;
     currentName = name;
-    if (current) {
-      current.src.stop();
-      current = null;
-    }
-    if (!featuredMusic) return;
-    featuredMusic.play().catch(() => {});
   }
 
   function sfx(name, volume = 1) {

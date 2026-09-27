@@ -21,7 +21,7 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
   };
 
-  const slides = $$('.slide');
+  const slides = $$('.slide:not(.slide--optional)');
   const total = slides.length;
   let cur = 0;
   let busy = false;
@@ -40,7 +40,7 @@
     if (key in I18N.kk) return I18N.kk[key];
     return kkStatic[key] != null ? kkStatic[key] : key;
   }
-  const title = (i) => t('titles')[i];
+  const title = (i) => t('titles')[Number(slides[i].dataset.title.slice(1)) - 1];
 
   function applyLang(next, silent) {
     lang = I18N[next] || next === 'kk' ? next : 'kk';
@@ -768,22 +768,13 @@
   }
 
   function ready() {
-    gateFill.style.width = '100%';
-    gatePct.textContent = '100';
-    const label = $('[data-i18n="gate.loading"]', gate);
-    label.dataset.i18n = 'gate.loaded';
-    label.textContent = t('gate.loaded');
-    gateSound.disabled = false;
-    gateMute.disabled = false;
-    gate.classList.add('ready');
-    gateSound.focus({ preventScroll: true });
+    gate.hidden = true;
   }
 
   async function start(withSound) {
     if (started) return;
     started = true;
-    setSound(withSound);
-    Audio.sfx('click');
+    setSound(false);
     const target = startIndex();
     if (reduced) {
       gate.hidden = true;
@@ -817,5 +808,6 @@
   applyLang(savedLang || (browserLang === 'ru' ? 'ru' : browserLang === 'en' ? 'en' : 'kk'), true);
   show(0);
   slides.forEach((s, k) => { if (k !== 0) s.inert = true; });
-  preload().then(ready);
+  ready();
+  start(false);
 })();
