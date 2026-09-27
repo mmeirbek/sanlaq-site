@@ -21,8 +21,9 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
   };
 
-  const slides = $$('.slide:not(.slide--optional)');
-  const total = slides.length;
+  const allSlides = $$('.slide:not(.slide--optional)');
+  let slides = allSlides;
+  let total = slides.length;
   let cur = 0;
   let busy = false;
   let started = false;
@@ -324,9 +325,16 @@
     if (a.dataset.action === 'home') { Audio.sfx('click'); goTo(0); }
   });
 
+  function setAudience(audience) {
+    slides = allSlides.filter((slide) => slide.dataset.audience === 'both' || slide.dataset.audience === audience);
+    total = slides.length;
+  }
+
   $$('[data-audience]').forEach((button) => button.addEventListener('click', (event) => {
     event.preventDefault();
-    const targetId = button.dataset.audience === 'investor' ? 's11' : 's6';
+    const audience = button.dataset.audience;
+    setAudience(audience);
+    const targetId = audience === 'investor' ? 's11' : 's6';
     const target = slides.findIndex((slide) => slide.id === targetId);
     if (target >= 0) goTo(target);
   }));
