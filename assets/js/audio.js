@@ -20,8 +20,8 @@
     battle: { seed: 12, bpm: 132, phrases: [PHRASE_DRIVE, PHRASE_DRIVE, PHRASE_B, PHRASE_DRIVE], gallop: true, gain: 0.62 },
     map: { seed: 13, bpm: 96, phrases: [PHRASE_TRAVEL, PHRASE_A, PHRASE_TRAVEL, PHRASE_B], gallop: true, gain: 0.56 }
   };
-  const FEATURED_MUSIC_URL = 'assets/audio/zhailau-kol-keshteri.mp3?v=e88ef19';
-  const FEATURED_MUSIC_VOLUME = 0.65;
+  const FEATURED_MUSIC_URL = 'assets/audio/zhailau-kol-keshteri.mp3?v=f204ea3';
+  const FEATURED_MUSIC_VOLUME = 0.4;
 
   let ctx = null;
   let master, musicBus, sfxBus, windBus;
