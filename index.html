@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SAÑLAQ — Ұлттық тарихи пиксель-RPG</title>
+  <meta name="description" content="SAÑLAQ — қазақ тарихы мен мәдениетін ойнатып үйрететін пиксель-RPG. Керей хан, Абылай хан, Қабанбай батыр. Steam · 2590₸ · 2027 жылғы қаңтар.">
+  <meta name="theme-color" content="#351713">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SAÑLAQ">
+  <meta property="og:title" content="SAÑLAQ — Тарихты оқыма, оны ойнап өт">
+  <meta property="og:description" content="Қазақ тарихы мен мәдениетіне арналған пиксель-RPG. Үш тұлға, үш дәуір, ұлттық ойындар.">
+  <meta property="og:image" content="og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:ELGR,wght@1..2,700..900&family=Press+Start+2P&family=Tiny5&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- Start gate: preloads the art and gives the browser the click it needs before audio can play -->
+<div class="gate" id="gate">
+  <div class="gate__lang lang" aria-label="Тіл / Язык / Language">
+    <button type="button" data-lang="kk" class="on">KZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button>
+  </div>
+  <div class="gate__inner">
+    <img class="gate__logo px" src="assets/img/logo.png" alt="SAÑLAQ" width="342" height="76">
+    <div class="gate__load">
+      <div class="bar"><div class="bar__fill" id="gate-fill"></div></div>
+      <p class="gate__pct"><span data-i18n="gate.loading">ЖҮКТЕЛУДЕ</span> · <span id="gate-pct">0</span>%</p>
+    </div>
+    <div class="gate__btns">
+      <button type="button" class="cta" id="gate-sound" disabled><i></i><span data-i18n="gate.start">ДЫБЫСПЕН БАСТАУ</span><i></i></button>
+      <button type="button" class="ghost" id="gate-mute" disabled data-i18n="gate.mute">ДЫБЫССЫЗ</button>
+    </div>
+    <p class="gate__tip" data-i18n="gate.tip">Құлаққап кисең — домбыра үні жақсырақ естіледі.</p>
+  </div>
+  <p class="gate__keys" data-i18n="gate.keys">← → · SPACE · ДӨҢГЕЛЕК — СЛАЙДТАР АРАСЫНДА ЖҮРУ</p>
+</div>
+
+<main class="deck" id="deck">
+
+  <!-- 01 · Cover -->
+  <section class="slide s-cover is-active" id="s1" data-title="t1" data-bg="#8B2E24" data-theme="dark" data-music="menu">
+    <div class="bgimg bgimg--steppe" aria-hidden="true"></div>
+    <div class="veil" aria-hidden="true"></div>
+    <canvas class="embers" aria-hidden="true"></canvas>
+    <div class="stage">
+      <div class="cover">
+        <p class="eyebrow cover__eb" data-i18n="s1.eyebrow" data-reveal>ҰЛТТЫҚ ТАРИХИ ПИКСЕЛЬ-RPG</p>
+        <h1 class="cover__logo" data-reveal style="--rd:.15s"><img class="px" src="assets/img/logo.png" alt="SAÑLAQ" width="342" height="76"></h1>
+        <p class="cover__tag" data-i18n="s1.tagline" data-split="words">Тарихты оқыма — оны <span class="hl">ойнап өт</span>.</p>
+        <div class="cover__row" data-reveal style="--rd:.7s">
+          <button type="button" class="cta" data-action="next"><i></i><span data-i18n="s1.cta">САЯХАТТЫ БАСТАУ</span><i></i></button>
+          <p class="badge" data-i18n="s1.badge">STEAM · 2590₸ · ҚАҢТАР 2027</p>
+        </div>
+      </div>
+    </div>
+    <div class="walkers" aria-hidden="true">
+      <img class="px walker" data-look="kerey" src="assets/img/sprites/kerey_walk_E_00.png" alt="" width="48" height="80">
+      <img class="px walker" data-look="abylai" src="assets/img/sprites/abylai_walk_E_00.png" alt="" width="48" height="80">
+      <img class="px walker" data-look="kabanbay" src="assets/img/sprites/kabanbay_walk_E_00.png" alt="" width="48" height="80">
+    </div>
+  </section>
+
+  <!-- 02 · Problem -->
+  <section class="slide s-problem pat-wine" id="s2" data-title="t2" data-bg="#6D1D17" data-theme="dark" data-music="menu">
+    <div class="stage">
+      <img class="px deco-dombra" src="assets/img/icons/dombra.png" alt="" width="32" height="32" aria-hidden="true">
+      <div class="col center">
+        <p class="eyebrow gold" data-i18n="s2.eyebrow" data-reveal>МӘСЕЛЕ</p>
+        <h2 class="h-display problem__title" data-i18n="s2.title" data-split="chars">Қазақстандық ойындар 294 миллион рет жүктелген. Ал қазақ тарихын ойнатып үйрететін RPG — <span class="hl">жоқтың қасы</span>.</h2>
+      </div>
+      <div class="stats">
+        <div class="stat" data-reveal style="--rd:.9s"><b class="count" data-to="57">0</b><span data-i18n="s2.l1">ӘЗІРЛЕУШІ</span></div>
+        <div class="stat" data-reveal style="--rd:1.0s"><b class="count" data-to="69">0</b><span data-i18n="s2.l2">ОЙЫН</span></div>
+        <div class="stat" data-reveal style="--rd:1.1s"><b class="count" data-to="294754600">0</b><span data-i18n="s2.l3">ЖҮКТЕУ</span></div>
+      </div>
+      <p class="src" data-i18n="s2.src" data-reveal style="--rd:1.3s">ДЕРЕККӨЗ: OVERVIEW OF GAMES IN KAZAKHSTAN · GAMEDEV CENTER ASTANA HUB</p>
+    </div>
+  </section>
+
+  <!-- 03 · We believe -->
+  <section class="slide s-believe pat-parch" id="s3" data-title="t3" data-bg="#F7E6D1" data-theme="light" data-music="menu">
+    <div class="stage">
+      <div class="col center">
+        <p class="eyebrow wine" data-i18n="s3.eyebrow" data-reveal>БІЗ СЕНЕМІЗ</p>
+        <div class="statements">
+          <p class="st" data-i18n="s3.a" data-split="chars">Ең жақсы сабақ — <span>ойын</span>.<sup>1</sup></p>
+          <p class="st" data-i18n="s3.b" data-split="chars" style="--d0:.45s">Ең жақсы оқулық — <span>бабалар жолы</span>.<sup>2</sup></p>
+          <p class="st" data-i18n="s3.c" data-split="chars" style="--d0:.9s">Ең жақсы естелік — <span>өзің өткен тарих</span>.<sup>3</sup></p>
+        </div>
+      </div>
+      <div class="footnotes" data-reveal style="--rd:1.6s">
+        <span data-i18n="s3.f1">¹ ИӘ, ШЫН АЙТАМЫЗ.</span>
+        <span data-i18n="s3.f2">² КӨШПЕН БІРГЕ ЖҮРІП КӨР.</span>
+        <span data-i18n="s3.f3">³ ҚАЗАҚСТАНДЫҚ ОЙЫНШЫЛАРДЫҢ 96,6%-Ы ОЙЫНДЫ БІРДЕН ТҮСІНДІ.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Solution -->
+  <section class="slide s-solution pat-deep" id="s4" data-title="t4" data-bg="#471310" data-theme="dark" data-music="select">
+    <div class="stage">
+      <h2 class="h-display solution__title" data-i18n="s4.title" data-split="chars">Тарихқа кір.</h2>
+      <div class="cards4">
+        <article class="pcard" data-drop style="--i:0;--rot:-1.5deg">
+          <p class="lab" data-i18n="s4.c1l">01 · КЕЙІПКЕР</p>
+          <img class="px" src="assets/img/icons/swords.png" alt="" width="32" height="32">
+          <h3 data-i18n="s4.c1">Тарихи тұлғаны таңда: хан ба, батыр ма?</h3>
+        </article>
+        <article class="pcard" data-drop style="--i:1;--rot:0deg;--ty:-14px">
+          <p class="lab" data-i18n="s4.c2l">02 · СЮЖЕТ</p>
+          <img class="px" src="assets/img/icons/yurt.png" alt="" width="32" height="32">
+          <h3 data-i18n="s4.c2">Әр тарау — нақты тарихи оқиға. Шешімді сен қабылдайсың.</h3>
+        </article>
+        <article class="pcard" data-drop style="--i:2;--rot:1.2deg">
+          <p class="lab" data-i18n="s4.c3l">03 · МӘДЕНИЕТ</p>
+          <img class="px" src="assets/img/icons/shapan.png" alt="" width="32" height="32">
+          <h3 data-i18n="s4.c3">Киімді, салтты, ұлттық ойындарды ойнап жүріп үйрен.</h3>
+        </article>
+        <article class="pcard" data-drop style="--i:3;--rot:0deg;--ty:-8px">
+          <p class="lab" data-i18n="s4.c4l">04 · ЭНЦИКЛОПЕДИЯ</p>
+          <img class="px" src="assets/img/icons/zhuz.png" alt="" width="32" height="32">
+          <h3 data-i18n="s4.c4">Ашылған әр дерек энциклопедияңа жазылады.</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Heroes -->
+  <section class="slide s-heroes pat-gold" id="s5" data-title="t5" data-bg="#D99A55" data-theme="light" data-music="select">
+    <div class="stage">
+      <h2 class="h-display heroes__title" data-i18n="s5.title" data-split="chars">Үш тұлға. Үш дәуір.</h2>
+      <div class="heroes">
+        <button type="button" class="hero hero--l" data-hero="kabanbay" data-drop style="--i:0">
+          <span class="hero__inner">
+            <span class="hero__front">
+              <img src="assets/img/cards/kabanbay.webp" alt="" width="512" height="768">
+              <span class="hero__cap">
+                <span class="hero__nm" data-i18n="h.kab.n">Қабанбай батыр</span>
+                <span class="hero__era" data-i18n="h.kab.e">БАТЫР · XVIII Ғ.</span>
+                <span class="hero__tg" data-i18n="h.kab.t">Ерлік. Қорғаныс. Ел.</span>
+                <span class="hero__ch" data-i18n="h.kab.c">III ТАРАУ · ҚОРҒАНЫС</span>
+              </span>
+            </span>
+            <span class="hero__back">
+              <span class="hero__ch" data-i18n="h.kab.c">III ТАРАУ · ҚОРҒАНЫС</span>
+              <img class="px" src="assets/img/portraits/kabanbay.png" alt="" width="64" height="64">
+              <span class="hero__sum" data-i18n="h.kab.s">Жаудың ізін тап, ұстадан қару ал, жекпе-жекке шық. Аңырақайда жасақты бір тудың астына жина.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="hero hero--c" data-hero="kerey" data-drop style="--i:1">
+          <span class="hero__inner">
+            <span class="hero__front">
+              <img src="assets/img/cards/kerey.webp" alt="" width="512" height="768">
+              <span class="hero__cap">
+                <span class="hero__nm" data-i18n="h.ker.n">Керей хан</span>
+                <span class="hero__era" data-i18n="h.ker.e">ХАН · XV Ғ.</span>
+                <span class="hero__tg" data-i18n="h.ker.t">Көш. Ел. Бастау.</span>
+                <span class="hero__ch" data-i18n="h.ker.c">I ТАРАУ · КӨШ</span>
+              </span>
+            </span>
+            <span class="hero__back">
+              <span class="hero__ch" data-i18n="h.ker.c">I ТАРАУ · КӨШ</span>
+              <img class="px" src="assets/img/portraits/kerey.png" alt="" width="64" height="64">
+              <span class="hero__sum" data-i18n="h.ker.s">Әбілқайыр ордасында тыныштық жоқ. Елді Жетісуға бастап, Қазақ хандығының іргетасын қала.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="hero hero--r" data-hero="abylai" data-drop style="--i:2">
+          <span class="hero__inner">
+            <span class="hero__front">
+              <img src="assets/img/cards/abylai.webp" alt="" width="512" height="768">
+              <span class="hero__cap">
+                <span class="hero__nm" data-i18n="h.aby.n">Абылай хан</span>
+                <span class="hero__era" data-i18n="h.aby.e">ХАН · XVIII Ғ.</span>
+                <span class="hero__tg" data-i18n="h.aby.t">Бірлік. Дипломатия. Ел.</span>
+                <span class="hero__ch" data-i18n="h.aby.c">II ТАРАУ · БІРЛІК</span>
+              </span>
+            </span>
+            <span class="hero__back">
+              <span class="hero__ch" data-i18n="h.aby.c">II ТАРАУ · БІРЛІК</span>
+              <img class="px" src="assets/img/portraits/abylai.png" alt="" width="64" height="64">
+              <span class="hero__sum" data-i18n="h.aby.s">Үш жүздің елшілерін тыңда, бәйгеге қосыл, Түркістандағы жиынға жет. Ел сені ақ киізге көтере ме — таңдауыңа байланысты.</span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <p class="hint" data-i18n="s5.hint" data-reveal style="--rd:1.2s">КАРТАНЫ БАС — ТАРАУДЫ АШ</p>
+    </div>
+  </section>
+
+  <!-- 06 · Gameplay -->
+  <section class="slide s-gameplay" id="s6" data-title="t6" data-bg="#351713" data-theme="dark" data-music="aul">
+    <div class="stage">
+      <div class="gp">
+        <div class="gp__left">
+          <p class="eyebrow gold" data-i18n="s6.eyebrow" data-reveal>ГЕЙМПЛЕЙ</p>
+          <h2 class="h-display gp__title" data-i18n="s6.title" data-split="chars">Бір тарау — бір тарихи оқиға</h2>
+          <div class="gp__steps" role="tablist" data-reveal style="--rd:.6s">
+            <button type="button" class="step on" data-step="0" role="tab" aria-selected="true"><b>01</b><span data-i18n="s6.k1">АУЫЛДЫ АРАЛА</span></button>
+            <button type="button" class="step" data-step="1" role="tab" aria-selected="false"><b>02</b><span data-i18n="s6.k2">ШЕШІМ ҚАБЫЛДА</span></button>
+            <button type="button" class="step" data-step="2" role="tab" aria-selected="false"><b>03</b><span data-i18n="s6.k3">АУЫЛ ТІРЛІГІ</span></button>
+            <button type="button" class="step" data-step="3" role="tab" aria-selected="false"><b>04</b><span data-i18n="s6.k4">ОТ БАСЫ</span></button>
+            <button type="button" class="step" data-step="4" role="tab" aria-selected="false"><b>05</b><span data-i18n="s6.k5">КӨШ ЖОЛЫ</span></button>
+          </div>
+        </div>
+        <div class="gp__right" data-reveal style="--rd:.4s">
+          <div class="frame">
+            <img class="shot on" src="assets/img/shots/aul.webp" alt="" width="1280" height="720">
+            <img class="shot" src="assets/img/shots/dialogue.webp" alt="" width="1280" height="720" loading="lazy">
+            <img class="shot" src="assets/img/shots/firewood.webp" alt="" width="1280" height="720" loading="lazy">
+            <img class="shot" src="assets/img/shots/campfire.webp" alt="" width="1280" height="720" loading="lazy">
+            <img class="shot" src="assets/img/shots/map.webp" alt="" width="1280" height="720" loading="lazy">
+            <p class="frame__chip"><span data-i18n="s6.task">ТАПСЫРМА</span> <span class="gp__n">1</span>/7</p>
+          </div>
+          <div class="gp__caps" aria-live="polite">
+            <p class="cap on" data-i18n="s6.c1">Ауыл адамдарымен сөйлес, тапсырма ал — көмекші жебелер жол көрсетеді.</p>
+            <p class="cap" data-i18n="s6.c2">Таңдауың сюжет пен финалды өзгертеді: елді тыңдасаң — халық саған сенеді.</p>
+            <p class="cap" data-i18n="s6.c3">Отын жина, киіз үй тік, елшінің атын жетеле.</p>
+            <p class="cap" data-i18n="s6.c4">Кешкі от басында ақсақалдан тарихты тыңда.</p>
+            <p class="cap" data-i18n="s6.c5">Картамен нақты тарихи жолды жүріп өт: Сырдариядан Жетісуға дейін.</p>
+          </div>
+          <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · National games -->
+  <section class="slide s-games pat-parch" id="s7" data-title="t7" data-bg="#F7E6D1" data-theme="light" data-music="aul">
+    <div class="stage">
+      <div class="col center">
+        <p class="eyebrow wine" data-i18n="s7.eyebrow" data-reveal>ҰЛТТЫҚ ОЙЫНДАР</p>
+        <h2 class="h-display games__title" data-i18n="s7.title" data-split="chars">Бабалар ойыны — енді экранда</h2>
+      </div>
+      <div class="games">
+        <article class="gm" data-drop style="--i:0">
+          <img class="gm__sh" src="assets/img/shots/sokyr-teke.webp" alt="" width="1280" height="720" loading="lazy">
+          <div class="gm__bd"><h3><img class="px" src="assets/img/icons/blindfold.png" alt="" width="32" height="32"><span data-i18n="g1.n">Соқыр теке</span></h3><p data-i18n="g1.d">Көзің байлаулы. Шапалақ дыбысына қарап балаларды ұста.</p></div>
+        </article>
+        <article class="gm" data-drop style="--i:1">
+          <img class="gm__sh px" src="assets/img/scenes/asyk_ring.png" alt="" width="480" height="270" loading="lazy">
+          <div class="gm__bd"><h3><img class="px" src="assets/img/icons/asyk.png" alt="" width="32" height="32"><span data-i18n="g2.n">Асық ату</span></h3><p data-i18n="g2.d">Сақаны дәл ат, сызықтағы асықтарды ұтып ал.</p></div>
+        </article>
+        <article class="gm" data-drop style="--i:2">
+          <img class="gm__sh" src="assets/img/shots/baige.webp" alt="" width="1280" height="720" loading="lazy">
+          <div class="gm__bd"><h3><img class="px" src="assets/img/icons/horse.png" alt="" width="32" height="32"><span data-i18n="g3.n">Бәйге</span></h3><p data-i18n="g3.d">Бес белгіні ретімен ал, қарсыласыңнан озып мәреге жет.</p></div>
+        </article>
+        <article class="gm" data-drop style="--i:3">
+          <img class="gm__sh" src="assets/img/shots/duel.webp" alt="" width="1280" height="720" loading="lazy">
+          <div class="gm__bd"><h3><img class="px" src="assets/img/icons/swords.png" alt="" width="32" height="32"><span data-i18n="g4.n">Жекпе-жек</span></h3><p data-i18n="g4.d">Шабуыл, қорған, айла — шайқас алдындағы батырлар жекпе-жегі.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · Learn by playing -->
+  <section class="slide s-learn pat-wine" id="s8" data-title="t8" data-bg="#6D1D17" data-theme="dark" data-music="aul">
+    <div class="stage">
+      <div class="col center">
+        <h2 class="h-display learn__title" data-i18n="s8.title" data-split="chars">Ойнап жүріп үйрен</h2>
+        <p class="eyebrow gold" data-i18n="s8.sub" data-reveal style="--rd:.5s">32 МАҚАЛА · 4 БӨЛІМ · 11 ГАРДЕРОБ ЗАТЫ</p>
+      </div>
+      <div class="learn">
+        <div class="tiles" role="tablist" data-reveal style="--rd:.6s">
+          <button type="button" class="tile on" data-item="0" role="tab" aria-selected="true"><img class="px" src="assets/img/icons/shapan.png" alt="" width="32" height="32"><span data-i18n="i0.n">Шапан</span></button>
+          <button type="button" class="tile" data-item="1" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/borik.png" alt="" width="32" height="32"><span data-i18n="i1.n">Бөрік</span></button>
+          <button type="button" class="tile" data-item="2" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/tymak.png" alt="" width="32" height="32"><span data-i18n="i2.n">Тымақ</span></button>
+          <button type="button" class="tile" data-item="3" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/kimeshek.png" alt="" width="32" height="32"><span data-i18n="i3.n">Кимешек</span></button>
+          <button type="button" class="tile" data-item="4" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/sauyt.png" alt="" width="32" height="32"><span data-i18n="i4.n">Сауыт</span></button>
+          <button type="button" class="tile" data-item="5" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/dulyga.png" alt="" width="32" height="32"><span data-i18n="i5.n">Дулыға</span></button>
+          <button type="button" class="tile" data-item="6" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/etik.png" alt="" width="32" height="32"><span data-i18n="i6.n">Етік</span></button>
+          <button type="button" class="tile" data-item="7" role="tab" aria-selected="false"><img class="px" src="assets/img/icons/dombra.png" alt="" width="32" height="32"><span data-i18n="i7.n">Домбыра</span></button>
+        </div>
+        <div class="entry" data-reveal style="--rd:.8s" aria-live="polite">
+          <div class="entry__head">
+            <img class="px entry__icon" src="assets/img/icons/shapan.png" alt="" width="32" height="32">
+            <div>
+              <p class="entry__name">Шапан</p>
+              <p class="entry__slot">СЫРТ КИІМ</p>
+            </div>
+          </div>
+          <div class="entry__rule"></div>
+          <p class="entry__desc">Ұзын, кең етекті сырт киім. Мерекеде де, күнделікті де киілген. Құрметті қонаққа шапан жабу — сый белгісі.</p>
+          <p class="entry__foot" data-i18n="s8.foot">ОЙЫНДА АШЫЛАДЫ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · Campfire (interactive) -->
+  <section class="slide s-fire" id="s9" data-title="t9" data-bg="#1e1822" data-theme="dark" data-music="night">
+    <div class="bgimg bgimg--fire" aria-hidden="true"></div>
+    <div class="stage">
+      <img class="px fire__scene" src="assets/img/scenes/campfire.png" alt="" width="480" height="270" aria-hidden="true">
+      <i class="fire__stars" aria-hidden="true"></i>
+      <i class="fire__glow" aria-hidden="true"></i>
+      <canvas class="embers embers--stage" width="1440" height="800" aria-hidden="true"></canvas>
+      <p class="fire__title box" data-i18n="s9.title" data-reveal>Көш алдындағы түн</p>
+      <div class="fire__ask box" data-reveal style="--rd:.4s">
+        <p class="fire__q" data-i18n="s9.ask">НЕ ТУРАЛЫ СҰРАЙСЫҢ?</p>
+        <button type="button" class="q" data-topic="0"><i></i><span data-i18n="q1">Ел неге көшеді?</span><i></i></button>
+        <button type="button" class="q" data-topic="1"><i></i><span data-i18n="q2">Жетісу жері</span><i></i></button>
+        <button type="button" class="q" data-topic="2"><i></i><span data-i18n="q3">Бабалар ойыны</span><i></i></button>
+        <button type="button" class="q" data-topic="3"><i></i><span data-i18n="q4">Ұлытау жайлы</span><i></i></button>
+        <button type="button" class="q q--go" data-action="next"><i></i><span data-i18n="s9.sleep">ҰЙЫҚТАУҒА · АЛҒА</span><i></i></button>
+      </div>
+      <div class="talk" data-reveal style="--rd:.7s">
+        <p class="talk__name" data-i18n="s9.speaker">АҚСАҚАЛ</p>
+        <button type="button" class="talk__box box" id="talk">
+          <span class="talk__face"><img class="px" src="assets/img/portraits/elder.png" alt="" width="64" height="64"></span>
+          <span class="talk__body">
+            <span class="talk__text" id="talk-text"></span>
+            <span class="talk__more" data-i18n="s9.continue">КЛИК · ЖАЛҒАСТЫРУ</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · Proof -->
+  <section class="slide s-proof pat-parch" id="s10" data-title="t10" data-bg="#F7E6D1" data-theme="light" data-music="battle">
+    <div class="stage">
+      <div class="proof" data-reveal>
+        <div class="proof__track">
+          <article class="pf on">
+            <header><div><p class="pf__l" data-i18n="p1.l">ДӘЛЕЛ 1 · USER TESTING</p><p class="pf__s" data-i18n="p1.s">ҚАЗАҚСТАН — 30 · АҚШ — 20</p></div></header>
+            <h3 class="pf__big" data-i18n="p1.b">50 ойыншы.<br>2 ел.<br><span>1 MVP.</span></h3>
+            <p class="pf__f" data-i18n="p1.f">ТЕСТІЛЕУ ЖАЛҒАСУДА</p>
+          </article>
+          <article class="pf">
+            <header><div><p class="pf__l" data-i18n="p2.l">ДӘЛЕЛ 2 · СЕССИЯ</p><p class="pf__s" data-i18n="p2.s">ОРТАША СЕССИЯ ҰЗАҚТЫҒЫ</p></div></header>
+            <h3 class="pf__big pf__big--m" data-i18n="p2.b">38 минут — Қазақстан.<br><span>47 минут — АҚШ.</span></h3>
+            <p class="pf__f" data-i18n="p2.f">БІР ОТЫРЫСТА, ҮЗІЛІССІЗ</p>
+          </article>
+          <article class="pf">
+            <header><div><p class="pf__l" data-i18n="p3.l">ДӘЛЕЛ 3 · ТҮСІНІКТІЛІК</p><p class="pf__s" data-i18n="p3.s">ОЙЫНДЫ БІРДЕН ТҮСІНГЕНДЕР · RETENTION</p></div></header>
+            <h3 class="pf__big pf__big--m" data-i18n="p3.b">96,6% түсінді.<br><span>70% қайта оралды.</span></h3>
+            <p class="pf__f" data-i18n="p3.f">ҚАЗАҚСТАН. АҚШ: 90% · 75%</p>
+          </article>
+          <article class="pf">
+            <header><div><p class="pf__l" data-i18n="p4.l">ДӘЛЕЛ 4 · TRACTION</p><p class="pf__s" data-i18n="p4.s">АЛҒАШҚЫ ТӨЛЕМДЕР МЕН СЕРІКТЕСТЕР</p></div></header>
+            <h3 class="pf__big pf__big--m" data-i18n="p4.b">32 алдын ала төлем.<br><span>2 орталық келісімде.</span></h3>
+            <p class="pf__f" data-i18n="p4.f">АЛДЫН АЛА ТӨЛЕМ — 1000₸ · LINGUA STUDIO</p>
+          </article>
+        </div>
+        <button type="button" class="pb proof__table" data-modal="table"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h8v1H0zM0 7h8v1H0zM0 1h1v6H0zM7 1h1v6H7zM2 2h4v1H2zM2 4h4v1H2z"/></svg><span data-i18n="s10.table">КЕСТЕНІ АШУ</span></button>
+        <p class="proof__n"><span id="proof-n">1</span> / 4</p>
+      </div>
+      <div class="proof-arrows">
+        <button type="button" class="rnd proof__prev" data-proof="-1" data-i18n-aria="aria.prevProof" aria-label="Алдыңғы дәлел"><svg width="14" height="16" viewBox="0 0 6 7" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M1 3h1v1H1zM2 2h1v3H2zM3 1h1v5H3zM4 0h1v7H4z"/></svg></button>
+        <button type="button" class="rnd proof__next" data-proof="1" data-i18n-aria="aria.nextProof" aria-label="Келесі дәлел"><svg width="14" height="16" viewBox="0 0 6 7" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M1 0h1v7H1zM2 1h1v5H2zM3 2h1v3H3zM4 3h1v1H4z"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · Business model -->
+  <section class="slide s-biz" id="s11" data-title="t11" data-bg="#351713" data-theme="dark" data-music="battle">
+    <div class="stage">
+      <div class="col center">
+        <p class="eyebrow gold" data-i18n="s11.eyebrow" data-reveal>БИЗНЕС-МОДЕЛЬ</p>
+        <h2 class="h-display biz__title" data-i18n="s11.title" data-split="chars">Бір ойын — үш жол</h2>
+      </div>
+      <div class="plans">
+        <article class="plan" data-drop style="--i:0">
+          <i class="plan__gem" aria-hidden="true"></i>
+          <p class="plan__l" data-i18n="b1.l">01 · ОҚУ ОРТАЛЫҚТАРЫ</p>
+          <p class="plan__p">25 000₸<small data-i18n="per.mo">/ АЙ</small></p>
+          <p class="plan__d" data-i18n="b1.d">Мектептер мен дайындық орталықтарына B2B жазылым.</p>
+          <button type="button" class="pb plan__btn" data-contact="school" data-i18n="b1.btn">ӨТІНІМ ҚАЛДЫРУ</button>
+          <p class="plan__tag" data-i18n="b1.t">+ ЖАРНАМА</p>
+        </article>
+        <article class="plan" data-drop style="--i:1">
+          <i class="plan__gem" aria-hidden="true"></i>
+          <p class="plan__l">02 · PC · STEAM</p>
+          <p class="plan__p">2590₸</p>
+          <p class="plan__d" data-i18n="b2.d">Толық нұсқа. Релиз — 2027 жылғы қаңтар.</p>
+          <p class="plan__tag" data-i18n="b2.t">+ МОНЕТИЗАЦИЯ</p>
+        </article>
+        <article class="plan" data-drop style="--i:2">
+          <i class="plan__gem" aria-hidden="true"></i>
+          <p class="plan__l">03 · MOBILE</p>
+          <p class="plan__p" data-i18n="b3.p">ТЕГІН</p>
+          <p class="plan__d" data-i18n="b3.d">App Store және Google Play.</p>
+          <p class="plan__tag" data-i18n="b3.t">+ ЖАРНАМА · ІШКІ САТЫП АЛУЛАР</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · Market -->
+  <section class="slide s-market pat-gold" id="s12" data-title="t12" data-bg="#D99A55" data-theme="light" data-music="battle">
+    <div class="stage">
+      <div class="mk">
+        <div class="mk__left">
+          <p class="eyebrow deep" data-i18n="s12.eyebrow" data-reveal>НАРЫҚ</p>
+          <h2 class="h-display mk__title" data-i18n="s12.title" data-split="chars">Аудитория бар. Орын бос.</h2>
+          <div class="rings" aria-label="TAM 343 млн $, SAM 5,8 млн $, SOM 1 млн $">
+            <div class="ring ring--tam"><span class="k">TAM</span><span class="v" data-i18n="m.tam">343 млн $</span></div>
+            <div class="ring ring--sam"><span class="k">SAM</span><span class="v" data-i18n="m.sam">5,8 млн $</span></div>
+            <div class="ring ring--som"><span class="k">SOM</span><span class="v" data-i18n="m.som">1 млн $</span></div>
+          </div>
+        </div>
+        <div class="mk__right">
+          <div class="ue2">
+            <div class="ue" data-reveal style="--rd:.8s"><span>LTV</span><b>2590₸</b></div>
+            <div class="ue" data-reveal style="--rd:.9s"><span>CAC</span><b>444₸</b></div>
+          </div>
+          <p class="ratio" data-reveal style="--rd:1.1s">LTV : CAC<br><span><i class="eq">=</i> <b data-i18n="m.ratio">5,8×</b></span></p>
+          <p class="mk__p" data-i18n="s12.p" data-reveal style="--rd:1.3s">Әр ойыншыны тарту құны оның әкелетін табысынан 5,8 есе аз.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · Roadmap -->
+  <section class="slide s-road pat-parch" id="s13" data-title="t13" data-bg="#F7E6D1" data-theme="light" data-music="map">
+    <div class="bgimg bgimg--sepia" aria-hidden="true"></div>
+    <div class="stage">
+      <div class="col center">
+        <p class="eyebrow wine" data-i18n="s13.eyebrow" data-reveal>ЖОЛ КАРТАСЫ</p>
+        <h2 class="h-display road__title" data-i18n="s13.title" data-split="chars">Көш енді ғана басталды</h2>
+      </div>
+      <div class="road">
+        <div class="road__line"><i class="road__done"></i></div>
+        <img class="px road__walker" data-look="kerey" src="assets/img/sprites/kerey_walk_E_00.png" alt="" width="48" height="80" aria-hidden="true">
+        <ol class="road__ms">
+          <li class="ms done" style="--i:0"><i class="node"></i><b>01</b><strong>MVP</strong><p data-i18n="r1.d">3 тарау, 4 мини-ойын, энциклопедия</p><em data-i18n="r.done">ДАЙЫН</em></li>
+          <li class="ms done" style="--i:1"><i class="node"></i><b>02</b><strong data-i18n="r2.n">Тест</strong><p data-i18n="r2.d">50 ойыншы: Қазақстан мен АҚШ</p><em data-i18n="r.done">ДАЙЫН</em></li>
+          <li class="ms now" style="--i:2"><i class="node"></i><b>03</b><strong data-i18n="r3.n">Контент</strong><p data-i18n="r3.d">Жаңа тараулар, киімдер, өңірлер</p><em data-i18n="r.now">ҚАЗІР ОСЫНДАМЫЗ</em></li>
+          <li class="ms" style="--i:3"><i class="node"></i><b>04</b><strong data-i18n="r4.n">Релиз</strong><p data-i18n="r4.d">Steam · 2590₸ · 2027 жылғы қаңтар</p></li>
+          <li class="ms" style="--i:4"><i class="node"></i><b>05</b><strong>Mobile</strong><p data-i18n="r5.d">Тегін · App Store, Google Play</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 · Team -->
+  <section class="slide s-team pat-wine" id="s14" data-title="t14" data-bg="#6D1D17" data-theme="dark" data-music="select">
+    <div class="stage">
+      <div class="col center">
+        <h2 class="h-display team__title" data-i18n="s14.title" data-split="chars">Команда</h2>
+        <p class="eyebrow gold" data-reveal style="--rd:.4s">4 CO-FOUNDER · NAZARBAYEV INTELLECTUAL SCHOOLS</p>
+      </div>
+      <div class="team">
+        <figure class="mb" data-drop style="--i:0" tabindex="0">
+          <span class="mb__ph"><img class="px mb__px" src="assets/img/team/aibek-px.png" alt="" width="72" height="96"><img class="mb__real" src="assets/img/team/aibek.webp" alt="Suyundik Aibek" width="360" height="480" loading="lazy"></span>
+          <figcaption><strong>Suyundik Aibek</strong><span>CO-FOUNDER<br>BACKEND ENGINEER</span></figcaption>
+        </figure>
+        <figure class="mb" data-drop style="--i:1;--ty:-12px" tabindex="0">
+          <span class="mb__ph"><img class="px mb__px" src="assets/img/team/beknur-px.png" alt="" width="72" height="96"><img class="mb__real" src="assets/img/team/beknur.webp" alt="Sapi Beknur" width="360" height="480" loading="lazy"></span>
+          <figcaption><strong>Sapi Beknur</strong><span>CO-FOUNDER<br>DEVELOPMENT MANAGER</span></figcaption>
+        </figure>
+        <figure class="mb" data-drop style="--i:2" tabindex="0">
+          <span class="mb__ph"><img class="px mb__px" src="assets/img/team/yedil-px.png" alt="" width="72" height="96"><img class="mb__real" src="assets/img/team/yedil.webp" alt="Yedil Nauryzbek" width="360" height="480" loading="lazy"></span>
+          <figcaption><strong>Yedil Nauryzbek</strong><span>CO-FOUNDER<br>BACKEND ENGINEER</span></figcaption>
+        </figure>
+        <figure class="mb" data-drop style="--i:3;--ty:-12px" tabindex="0">
+          <span class="mb__ph"><img class="px mb__px" src="assets/img/team/nurdaulet-px.png" alt="" width="72" height="96"><img class="mb__real" src="assets/img/team/nurdaulet.webp" alt="Nurdaulet Meiirbek" width="360" height="480" loading="lazy"></span>
+          <figcaption><strong>Nurdaulet Meiirbek</strong><span>CO-FOUNDER<br>SOFTWARE ENGINEER</span></figcaption>
+        </figure>
+      </div>
+      <p class="hint hint--light" data-i18n="s14.hint" data-reveal style="--rd:1.1s">ТІНТУІРДІ АПАР — НАҚТЫ ФОТО</p>
+    </div>
+  </section>
+
+  <!-- 15 · The ask -->
+  <section class="slide s-ask pat-parch" id="s15" data-title="t15" data-bg="#F7E6D1" data-theme="light" data-music="select">
+    <div class="stage">
+      <div class="col center">
+        <p class="eyebrow wine" data-reveal>THE ASK</p>
+        <h2 class="h-display ask__title" data-i18n="s15.title" data-split="chars">Бізге не керек</h2>
+      </div>
+      <div class="asks">
+        <article class="ask" data-drop style="--i:0">
+          <p class="ask__tab" data-i18n="s15.t1">РЕЛИЗГЕ</p>
+          <p class="ask__big"><b class="count" data-to="700">0</b>$</p>
+          <p class="row"><span>STEAM</span><b>100$</b></p>
+          <p class="row"><span>GOOGLE PLAY</span><b>43$</b></p>
+          <p class="row"><span>APP STORE</span><b>99$ <small data-i18n="per.mo">/ АЙ</small></b></p>
+          <p class="row"><span>INSTAGRAM + THREADS</span><b>458$</b></p>
+        </article>
+        <svg class="ask__arrow" width="72" height="72" viewBox="0 0 9 9" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 3h5v3H0zM5 1h1v7H5zM6 2h1v5H6zM7 3h1v3H7zM8 4h1v1H8z"/></svg>
+        <article class="ask" data-drop style="--i:1">
+          <p class="ask__tab" data-i18n="s15.t2">АЙ САЙЫН</p>
+          <p class="ask__big"><b class="count" data-to="400">0</b>$</p>
+          <p class="row"><span>APP STORE</span><b>99$</b></p>
+          <p class="row"><span>INSTAGRAM + THREADS</span><b>300$</b></p>
+          <p class="ask__note" data-i18n="s15.note">Платформа мен маркетингке кететін тұрақты шығын.</p>
+          <button type="button" class="pb" data-contact="investor" data-i18n="s15.cta">БАЙЛАНЫСУ</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 · Join + footer -->
+  <section class="slide s-join" id="s16" data-title="t16" data-bg="#8B2E24" data-theme="dark" data-music="menu">
+    <div class="bgimg bgimg--steppe" aria-hidden="true"></div>
+    <div class="veil veil--strong" aria-hidden="true"></div>
+    <div class="stage">
+      <div class="col center join">
+        <img class="px join__logo" src="assets/img/logo-small.png" alt="SAÑLAQ" width="118" height="31" data-reveal>
+        <h2 class="h-display join__title" data-i18n="s16.title" data-split="chars">Тарих сені күтіп тұр.</h2>
+        <p class="join__sub" data-i18n="s16.sub" data-reveal style="--rd:.8s">Ойыншы, мұғалім не инвестор болсаң да — бізге жаз.</p>
+        <div class="join__ctas" data-reveal style="--rd:1s">
+          <button type="button" class="cta" data-contact="player"><i></i><span data-i18n="s16.c1">АЛДЫН АЛА ТАПСЫРЫС</span><i></i></button>
+          <button type="button" class="cta cta--gold" data-contact="school"><i></i><span data-i18n="s16.c2">ОҚУ ОРТАЛЫҒЫНА ӨТІНІМ</span><i></i></button>
+          <button type="button" class="pb pb--tall" data-contact="investor" data-i18n="s16.c3">ИНВЕСТОРЛАРҒА</button>
+        </div>
+      </div>
+      <div class="runaway-zone">
+        <button type="button" class="runaway" id="runaway"><span data-i18n="s16.skip">ТАРИХТЫ ӨТКІЗІП ЖІБЕРУ</span><span class="runaway__hint" data-i18n="s16.catch">(ҰСТАП КӨР)</span></button>
+      </div>
+      <footer class="foot">
+        <span>© 2026 SAÑLAQ</span>
+        <span class="foot__links">
+          <button type="button" data-contact="player" data-i18n="f.contact">БАЙЛАНЫС</button>
+          <button type="button" data-modal="credits" data-i18n="f.credits">КРЕДИТТЕР</button>
+        </span>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<!-- Bottom bar -->
+<nav class="navbar" id="navbar" aria-label="Слайдтар">
+  <div class="navbar__side">
+    <div class="lang" aria-label="Тіл / Язык / Language">
+      <button type="button" data-lang="kk" class="on">KZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button>
+    </div>
+  </div>
+  <div class="navbar__mid">
+    <button type="button" class="pb nav-prev" id="nav-prev" data-i18n-aria="nav.prev" aria-label="АРТҚА"><svg width="12" height="14" viewBox="0 0 6 7" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M1 3h1v1H1zM2 2h1v3H2zM3 1h1v5H3zM4 0h1v7H4z"/></svg><span data-i18n="nav.prev">АРТҚА</span></button>
+    <button type="button" class="dia" id="nav-menu" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false" data-i18n-aria="nav.menu" aria-label="Слайдтар мәзірі"><svg width="20" height="16" viewBox="0 0 5 4" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h5v1H0zM0 1.5h5v1H0zM0 3h5v1H0z"/></svg></button>
+    <button type="button" class="pb nav-next" id="nav-next" data-i18n-aria="nav.next" aria-label="АЛҒА"><span class="nav-next__t" data-i18n="nav.next">АЛҒА</span><svg width="12" height="14" viewBox="0 0 6 7" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M1 0h1v7H1zM2 1h1v5H2zM3 2h1v3H3zM4 3h1v1H4z"/></svg></button>
+  </div>
+  <div class="navbar__side navbar__side--r">
+    <button type="button" class="snd is-muted" id="sound" aria-pressed="false" data-i18n-aria="nav.soundOn" aria-label="Дыбысты қосу">
+      <svg class="snd__on" width="22" height="18" viewBox="0 0 11 9" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 3h2v3H0zM2 2h1v5H2zM3 1h1v7H3zM4 0h1v9H4zM6 3h1v3H6zM7 1h1v1H7zM7 7h1v1H7zM8 2h1v5H8z"/></svg>
+      <svg class="snd__off" width="22" height="18" viewBox="0 0 11 9" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 3h2v3H0zM2 2h1v5H2zM3 1h1v7H3zM4 0h1v9H4zM6 2h1v1H6zM7 3h1v1H7zM8 4h1v1H8zM9 5h1v1H9zM10 6h1v1h-1zM10 2h1v1h-1zM9 3h1v1H9zM7 5h1v1H7zM6 6h1v1H6z"/></svg>
+    </button>
+    <p class="counter"><span data-i18n="nav.slide">СЛАЙД</span> <span id="counter">01</span>/<span id="total">16</span></p>
+  </div>
+</nav>
+
+<!-- Language switch for phones (the bottom bar has no room for it there) -->
+<div class="lang lang--top" aria-label="Тіл / Язык / Language">
+  <button type="button" data-lang="kk" class="on">KZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button>
+</div>
+
+<!-- Scroll-to-next ring -->
+<div class="scrollnav" id="scrollnav" aria-hidden="true">
+  <span data-i18n="nav.scroll">КЕЛЕСІ СЛАЙД</span>
+  <i class="scrollnav__bar"><i id="scrollnav-fill"></i></i>
+</div>
+
+<!-- Pixel-block slide transition -->
+<div class="transition" id="transition" aria-hidden="true">
+  <div class="transition__grid" id="transition-grid"></div>
+  <div class="transition__text">
+    <p class="transition__label" id="transition-label"></p>
+    <p class="transition__title" id="transition-title"></p>
+  </div>
+</div>
+
+<!-- Slides menu -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+  <div class="menu__backdrop" data-close></div>
+  <div class="menu__tray">
+    <header>
+      <p class="menu__title" id="menu-title" data-i18n="menu.title">Слайдтар</p>
+      <button type="button" class="rnd" data-close data-i18n-aria="aria.close" aria-label="Жабу"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h2v1H0zM1 1h2v1H1zM2 2h2v1H2zM3 3h2v2H3zM4 2h2v1H4zM5 1h2v1H5zM6 0h2v1H6zM2 5h2v1H2zM1 6h2v1H1zM0 7h2v1H0zM4 5h2v1H4zM5 6h2v1H5zM6 7h2v1H6z"/></svg></button>
+    </header>
+    <div class="menu__grid" id="menu-grid"></div>
+  </div>
+</div>
+
+<!-- Modals -->
+<dialog class="modal" id="modal-contact" aria-labelledby="contact-title">
+  <div class="modal__box">
+    <p class="modal__title" id="contact-title" data-i18n="c.title">Байланыс</p>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="player" data-i18n="c.player">ОЙЫНШЫҒА</button>
+      <button type="button" role="tab" data-tab="school" data-i18n="c.school">ОҚУ ОРТАЛЫҒЫНА</button>
+      <button type="button" role="tab" data-tab="investor" data-i18n="c.investor">ИНВЕСТОРҒА</button>
+    </div>
+    <p class="modal__text" data-pane="player" data-i18n="c.playerText">Алдын ала тапсырыс берсең, релиз күні ойынды бірінші болып аласың.</p>
+    <p class="modal__text" data-pane="school" data-i18n="c.schoolText" hidden>Сабақта тарих пен мәдениетті ойын арқылы өтіңіз. B2B жазылым — айына 25 000₸.</p>
+    <p class="modal__text" data-pane="investor" data-i18n="c.investorText" hidden>Релизге 700$ және айына 400$ керек. Питч пен сандарды жібереміз.</p>
+    <div class="links" id="contact-links"></div>
+    <p class="modal__soon" id="contact-soon" data-i18n="c.soon" hidden>Байланыс сілтемелері жақында қосылады.</p>
+    <button type="button" class="rnd modal__x" data-close data-i18n-aria="aria.close" aria-label="Жабу"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h2v1H0zM1 1h2v1H1zM2 2h2v1H2zM3 3h2v2H3zM4 2h2v1H4zM5 1h2v1H5zM6 0h2v1H6zM2 5h2v1H2zM1 6h2v1H1zM0 7h2v1H0zM4 5h2v1H4zM5 6h2v1H5zM6 7h2v1H6z"/></svg></button>
+  </div>
+</dialog>
+
+<dialog class="modal" id="modal-table" aria-labelledby="table-title">
+  <div class="modal__box modal__box--wide">
+    <p class="modal__title" id="table-title">USER TESTING</p>
+    <table class="ut">
+      <thead><tr><th></th><th data-i18n="ut.kz">ҚАЗАҚСТАН</th><th data-i18n="ut.us">АҚШ</th></tr></thead>
+      <tbody>
+        <tr><th data-i18n="ut.r1">Қатысушылар</th><td>30</td><td>20</td></tr>
+        <tr><th data-i18n="ut.r2">Орташа сессия</th><td><span>38</span> <span data-i18n="ut.min">мин</span></td><td><span>47</span> <span data-i18n="ut.min">мин</span></td></tr>
+        <tr><th>Retention</th><td>70%</td><td>75%</td></tr>
+        <tr><th data-i18n="ut.r4">Ойынды түсінгендер</th><td data-i18n="ut.v1">96,6%</td><td>90%</td></tr>
+      </tbody>
+    </table>
+    <button type="button" class="rnd modal__x" data-close data-i18n-aria="aria.close" aria-label="Жабу"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h2v1H0zM1 1h2v1H1zM2 2h2v1H2zM3 3h2v2H3zM4 2h2v1H4zM5 1h2v1H5zM6 0h2v1H6zM2 5h2v1H2zM1 6h2v1H1zM0 7h2v1H0zM4 5h2v1H4zM5 6h2v1H5zM6 7h2v1H6z"/></svg></button>
+  </div>
+</dialog>
+
+<dialog class="modal" id="modal-sike" aria-labelledby="sike-title">
+  <div class="modal__box">
+    <p class="modal__title modal__title--big" id="sike-title" data-i18n="sike.title">ТОҚТА!</p>
+    <p class="modal__text" data-i18n="sike.text">Тарихты өткізіп жіберуге болмайды. Бірақ оны ойнап өтуге болады.</p>
+    <p class="modal__text modal__text--small" data-i18n="sike.touch">Компьютерде бұл батырма тышқаннан қашады. Байқап көр.</p>
+    <button type="button" class="cta" data-close data-action="home"><i></i><span data-i18n="sike.btn">ЖАРАЙДЫ, ОЙНАЙМЫН</span><i></i></button>
+  </div>
+</dialog>
+
+<dialog class="modal" id="modal-credits" aria-labelledby="credits-title">
+  <div class="modal__box modal__box--wide">
+    <p class="modal__title" id="credits-title" data-i18n="cr.title">Кредиттер</p>
+    <div class="modal__text modal__text--list">
+      <p data-i18n="cr.team">Команда: Suyundik Aibek, Sapi Beknur, Yedil Nauryzbek, Nurdaulet Meiirbek.</p>
+      <p data-i18n="cr.art">Арт, спрайттер мен скриншоттар — SAÑLAQ ойынының өзінен.</p>
+      <p data-i18n="cr.sound">Музыка мен дыбыс — ойынның процедуралық синтезі: домбыра үні (Karplus-Strong) браузерде тікелей жасалады.</p>
+      <p data-i18n="cr.fonts">Шрифттер: Handjet, Press Start 2P, Tiny5 — SIL Open Font License.</p>
+      <p data-i18n="cr.data">Нарық деректері: Overview of Games in Kazakhstan, GameDev Center Astana Hub. Тарихи деректер тексерілуде — ойын MVP кезеңінде.</p>
+    </div>
+    <button type="button" class="rnd modal__x" data-close data-i18n-aria="aria.close" aria-label="Жабу"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h2v1H0zM1 1h2v1H1zM2 2h2v1H2zM3 3h2v2H3zM4 2h2v1H4zM5 1h2v1H5zM6 0h2v1H6zM2 5h2v1H2zM1 6h2v1H1zM0 7h2v1H0zM4 5h2v1H4zM5 6h2v1H5zM6 7h2v1H6z"/></svg></button>
+  </div>
+</dialog>
+
+<p class="sr-only" id="announcer" aria-live="polite"></p>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/audio.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
