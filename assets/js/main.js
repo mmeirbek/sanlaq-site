@@ -324,7 +324,8 @@
     if (a.dataset.action === 'home') { Audio.sfx('click'); goTo(0); }
   });
 
-  $$('[data-audience]').forEach((button) => button.addEventListener('click', () => {
+  $$('[data-audience]').forEach((button) => button.addEventListener('click', (event) => {
+    event.preventDefault();
     const targetId = button.dataset.audience === 'investor' ? 's11' : 's6';
     const target = slides.findIndex((slide) => slide.id === targetId);
     if (target >= 0) goTo(target);
