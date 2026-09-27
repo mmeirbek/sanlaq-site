@@ -324,10 +324,10 @@
     if (a.dataset.action === 'home') { Audio.sfx('click'); goTo(0); }
   });
 
-  const investorPanel = $('#investor-panel');
-  $$('[data-role="investor"]').forEach((button) => button.addEventListener('click', () => {
-    investorPanel.hidden = !investorPanel.hidden;
-    button.setAttribute('aria-expanded', String(!investorPanel.hidden));
+  $$('[data-audience]').forEach((button) => button.addEventListener('click', () => {
+    const targetId = button.dataset.audience === 'investor' ? 's11' : 's6';
+    const target = slides.findIndex((slide) => slide.id === targetId);
+    if (target >= 0) goTo(target);
   }));
 
   /* keyboard */

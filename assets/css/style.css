@@ -141,11 +141,6 @@ button:disabled { cursor: default; }
 .role-card__label { font: 10px/1 var(--f-px); color: var(--gold); }
 .role-card strong { font: 800 30px/1 var(--f-disp); text-transform: uppercase; }
 .role-card > span:last-child { font: 20px/1.15 var(--f-body); }
-.investor-panel { width: 696px; padding: 16px; display: grid; grid-template-columns: repeat(3, 1fr) auto; align-items: center; gap: 12px; background: var(--cream); color: var(--ink); border: 4px solid var(--ink); box-shadow: 7px 7px 0 var(--ink); text-align: left; }
-.investor-panel[hidden] { display: none; }
-.investor-panel div { display: flex; flex-direction: column; gap: 7px; }
-.investor-panel b { font: 10px/1 var(--f-px); color: var(--wine); }
-.investor-panel span { font: 18px/1.1 var(--f-body); }
 .badge { height: 56px; display: flex; align-items: center; padding: 0 18px; border: 3px dashed var(--gold); font: 11px/1 var(--f-px); background: rgba(53, 23, 19, .55); }
 .slide.is-in .cover__logo img { animation: logoBob 4s steps(4) 1.2s infinite; }
 @keyframes logoBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
@@ -526,8 +521,6 @@ body[data-theme="light"] .scrollnav { color: var(--ink); }
 .is-mobile .stage-logo img { width: 177px; height: 46px; }
 .is-mobile .cover__roles { grid-template-columns: 1fr; width: min(100%, 420px); gap: 12px; }
 .is-mobile .role-card { min-height: 104px; }
-.is-mobile .investor-panel { width: min(100%, 420px); grid-template-columns: 1fr 1fr; }
-.is-mobile .investor-panel .pb { grid-column: 1 / -1; }
 .is-mobile .stage > .col, .is-mobile .s-problem .col, .is-mobile .s-believe .col, .is-mobile .s-games .col, .is-mobile .s-learn .col,
 .is-mobile .s-biz .col, .is-mobile .s-road .col, .is-mobile .s-team .col, .is-mobile .s-ask .col, .is-mobile .join { position: relative; left: auto; right: auto; top: auto; }
 .is-mobile .h-display { text-shadow: 3px 3px 0 var(--ink); }
