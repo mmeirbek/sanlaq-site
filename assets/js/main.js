@@ -340,7 +340,7 @@
     setAudience(audience);
     const targetId = audience === 'investor' ? 's11' : 's2';
     const target = slides.findIndex((slide) => slide.id === targetId);
-    if (target >= 0) goTo(target);
+    if (target >= 0) goTo(target, true);
   }));
 
   /* keyboard */
