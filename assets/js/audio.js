@@ -20,9 +20,12 @@
     battle: { seed: 12, bpm: 132, phrases: [PHRASE_DRIVE, PHRASE_DRIVE, PHRASE_B, PHRASE_DRIVE], gallop: true, gain: 0.62 },
     map: { seed: 13, bpm: 96, phrases: [PHRASE_TRAVEL, PHRASE_A, PHRASE_TRAVEL, PHRASE_B], gallop: true, gain: 0.56 }
   };
+  const FEATURED_MUSIC_URL = 'assets/audio/zhailau-kol-keshteri.mp3';
+  const FEATURED_MUSIC_VOLUME = 0.65;
 
   let ctx = null;
   let master, musicBus, sfxBus, windBus;
+  let featuredMusic = null;
   let muted = true;
   let current = null;
   let currentName = null;
@@ -211,46 +214,32 @@
     windBus = ctx.createGain();
     windBus.gain.value = 0.08;
     windBus.connect(master);
+    featuredMusic = new Audio(FEATURED_MUSIC_URL);
+    featuredMusic.loop = true;
+    featuredMusic.preload = 'auto';
+    const featuredSource = ctx.createMediaElementSource(featuredMusic);
+    const featuredGain = ctx.createGain();
+    featuredGain.gain.value = FEATURED_MUSIC_VOLUME;
+    featuredSource.connect(featuredGain).connect(master);
     const w = ctx.createBufferSource();
     w.buffer = wind();
     w.loop = true;
     w.connect(windBus);
     w.start();
-    // Warm the remaining tracks in idle time so later slide changes never stall on synthesis.
-    const names = Object.keys(TRACKS);
-    const warm = () => {
-      const name = names.find((n) => !musicCache[n]);
-      if (!name) return;
-      musicCache[name] = compose(name);
-      setTimeout(warm, 120);
-    };
-    setTimeout(warm, 1500);
     if (wanted) music(wanted);
     return true;
   }
 
   function music(name) {
     wanted = name;
-    if (!ctx || !name || name === currentName || !TRACKS[name]) return;
+    if (!ctx || !name || name === currentName) return;
     currentName = name;
-    const buffer = musicCache[name] || (musicCache[name] = compose(name));
-    const src = ctx.createBufferSource();
-    src.buffer = buffer;
-    src.loop = true;
-    const gain = ctx.createGain();
-    gain.gain.value = 0;
-    src.connect(gain).connect(musicBus);
-    const now = ctx.currentTime;
-    src.start(now);
-    gain.gain.linearRampToValueAtTime(1, now + 1.4);
     if (current) {
-      const old = current;
-      old.gain.gain.cancelScheduledValues(now);
-      old.gain.gain.setValueAtTime(old.gain.gain.value, now);
-      old.gain.gain.linearRampToValueAtTime(0, now + 1.2);
-      old.src.stop(now + 1.3);
+      current.src.stop();
+      current = null;
     }
-    current = { src, gain };
+    if (!featuredMusic) return;
+    featuredMusic.play().catch(() => {});
   }
 
   function sfx(name, volume = 1) {
