@@ -25,6 +25,7 @@
   let slides = allSlides;
   let total = slides.length;
   let cur = 0;
+  let activeAudience = 'all';
   let busy = false;
   let started = false;
   let lang = 'kk';
@@ -260,7 +261,7 @@
   function updateNav() {
     counter.textContent = String(cur + 1).padStart(2, '0');
     $('#total').textContent = String(total).padStart(2, '0');
-    prevBtn.disabled = cur === 0;
+    prevBtn.disabled = cur === 0 && activeAudience === 'all';
     const last = cur === total - 1;
     $('.nav-next__t', nextBtn).textContent = t(last ? 'nav.home' : 'nav.next');
     nextBtn.setAttribute('aria-label', t(last ? 'nav.home' : 'nav.next'));
@@ -317,8 +318,11 @@
     enter(i);
     busy = false;
   }
-  const next = () => goTo(cur === total - 1 ? 0 : cur + 1);
-  const prev = () => { if (cur > 0) goTo(cur - 1); };
+  const next = () => cur === total - 1 && activeAudience !== 'all' ? goTo(0, 'all') : goTo(cur === total - 1 ? 0 : cur + 1);
+  const prev = () => {
+    if (activeAudience !== 'all' && (cur === 0 || (activeAudience === 'player' && cur === 1))) goTo(0, 'all');
+    else if (cur > 0) goTo(cur - 1);
+  };
 
   prevBtn.addEventListener('click', () => { Audio.sfx('click'); prev(); });
   nextBtn.addEventListener('click', () => { Audio.sfx('click'); next(); });
@@ -331,8 +335,9 @@
   });
 
   function setAudience(audience) {
+    activeAudience = audience;
     slides = audience === 'investor'
-      ? allSlides.filter((slide) => slide.dataset.audience === 'investor')
+      ? ['s11', 's12', 's10', 's13', 's14', 's15'].map((id) => $('#' + id))
       : audience === 'player'
         ? allSlides.filter((slide) => slide.dataset.audience !== 'investor')
         : allSlides;
