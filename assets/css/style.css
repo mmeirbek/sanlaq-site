@@ -567,16 +567,18 @@ body.is-mobile[data-theme="light"] .lang--top button:not(.on) { background: var(
 .is-mobile .pb { font-size: 10px; }
 
 /* cover */
-.is-mobile .cover { position: relative; top: auto; gap: 20px; padding-top: 40px; }
+.is-mobile .cover { position: relative; top: auto; gap: 20px; padding-top: 0; }
 .is-mobile .cover__eb { font-size: 9px; line-height: 1.6; }
 .is-mobile .cover__logo img { width: min(342px, 100%); height: auto; }
 .is-mobile .cover__tag { font-size: 24px; }
 .is-mobile .cover__row { flex-direction: column; gap: 22px; }
 .is-mobile .badge { height: auto; padding: 10px 12px; font-size: 8px; }
-/* Pinned to the bottom of the first screen, the walkers scrolled up over the role cards.
- * On phones they get their own strip at the end of the cover column, above the navbar. */
-.is-mobile .s-cover .stage { padding-bottom: calc(var(--nav) + 116px); }
-.is-mobile .walkers { position: relative; bottom: auto; height: 80px; margin-top: calc(-88px - var(--nav)); }
+/* The walkers walk on top of the navbar, as on desktop. Inside the scrolling column an absolute
+ * strip scrolled up over the role cards, so on phones it is fixed to the screen, and the cover
+ * column ends above it (the cover has no corner logo, so its top padding can shrink too).
+ * On short screens the cards still reach the strip before scrolling, so they stack above it. */
+.is-mobile .walkers { position: fixed; height: 80px; }
+.is-mobile .s-cover .stage { z-index: 2; padding-top: 64px; padding-bottom: calc(var(--nav) + 100px); }
 .is-mobile .walker { width: 48px; height: 80px; }
 /* The navbar is solid on phones; this band would scroll up over the content. */
 .is-mobile .s-cover::after, .is-mobile .s-join::after { display: none; }
