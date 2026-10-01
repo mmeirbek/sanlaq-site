@@ -14,7 +14,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=readable-type">
+  <link rel="preload" href="assets/fonts/greybeard-16.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/greybeard-16-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/greybeard-22-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css?v=pixel-type">
 </head>
 <body>
 
@@ -570,7 +573,7 @@
 
 <!-- Pixel-block slide transition -->
 <div class="transition" id="transition" aria-hidden="true">
-  <div class="transition__grid" id="transition-grid"></div>
+  <canvas class="transition__grid" id="transition-grid"></canvas>
   <div class="transition__text">
     <p class="transition__label" id="transition-label"></p>
     <p class="transition__title" id="transition-title"></p>
@@ -639,7 +642,7 @@
       <p data-i18n="cr.team">Команда: Suyundik Aibek, Sapi Beknur, Yedil Nauryzbek, Nurdaulet Meiirbek.</p>
       <p data-i18n="cr.art">Арт, спрайттер мен скриншоттар — SAÑLAQ ойынының өзінен.</p>
       <p data-i18n="cr.sound">Музыка мен дыбыс — ойынның процедуралық синтезі: домбыра үні (Karplus-Strong) браузерде тікелей жасалады.</p>
-      <p data-i18n="cr.fonts">Шрифттер: Handjet, Press Start 2P, Tiny5 — SIL Open Font License.</p>
+      <p data-i18n="cr.fonts">Қаріп: Greybeard — Uwe Waldmann, Andy Walker, MIT лицензиясы.</p>
       <p data-i18n="cr.data">Нарық деректері: Overview of Games in Kazakhstan, GameDev Center Astana Hub. Тарихи деректер тексерілуде — ойын MVP кезеңінде.</p>
     </div>
     <button type="button" class="rnd modal__x" data-close data-i18n-aria="aria.close" aria-label="Жабу"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0 0h2v1H0zM1 1h2v1H1zM2 2h2v1H2zM3 3h2v2H3zM4 2h2v1H4zM5 1h2v1H5zM6 0h2v1H6zM2 5h2v1H2zM1 6h2v1H1zM0 7h2v1H0zM4 5h2v1H4zM5 6h2v1H5zM6 7h2v1H6z"/></svg></button>
@@ -648,8 +651,8 @@
 
 <p class="sr-only" id="announcer" aria-live="polite"></p>
 
-<script src="assets/js/i18n.js?v=investor-five-pages"></script>
+<script src="assets/js/i18n.js?v=pixel-type"></script>
 <script src="assets/js/audio.js?v=compact2"></script>
-<script src="assets/js/main.js?v=investor-proof-back"></script>
+<script src="assets/js/main.js?v=mobile-perf"></script>
 </body>
 </html>

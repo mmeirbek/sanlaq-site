@@ -43,12 +43,14 @@
     return kkStatic[key] != null ? kkStatic[key] : key;
   }
   const title = (i) => t('titles')[Number(slides[i].dataset.title.slice(1)) - 1];
+  // Touch screens get their own wording where the desktop text talks about the mouse.
+  const forPointer = (key) => (!finePointer && t(key + 'Touch') !== key + 'Touch' ? key + 'Touch' : key);
 
   function applyLang(next, silent) {
     lang = I18N[next] || next === 'kk' ? next : 'kk';
     document.documentElement.lang = lang === 'kk' ? 'kk' : lang;
     $$('[data-i18n]').forEach((el) => {
-      el.innerHTML = t(el.dataset.i18n);
+      el.innerHTML = t(forPointer(el.dataset.i18n));
       if (el.dataset.split) splitText(el);
     });
     $$('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
@@ -102,9 +104,13 @@
   $$('[data-split]').forEach(splitText);
 
   /* ---------------- layout ---------------- */
+  let laidOut = '';
   function layout() {
     const w = innerWidth;
     const h = innerHeight;
+    // Phones fire resize for toolbar and keyboard changes; rewriting the root variables restyles every slide.
+    if (laidOut === w + 'x' + h) return;
+    laidOut = w + 'x' + h;
     mobile = w < 760 || (w < 1000 && h > w);
     document.body.classList.toggle('is-mobile', mobile);
     const nav = mobile ? 76 : h < 720 ? 80 : 96;
@@ -149,6 +155,7 @@
 
   let lastHover = 0;
   document.addEventListener('pointerover', (e) => {
+    if (e.pointerType !== 'mouse') return; // a tap fires pointerover too; it already gets the click sound
     const el = e.target.closest('button, a');
     if (!el || el.contains(e.relatedTarget)) return;
     const now = performance.now();
@@ -158,33 +165,80 @@
   });
 
   /* ---------------- transition ---------------- */
+  // The checkerboard wipe is painted on one canvas at CSS-pixel size (upscaled with pixelated
+  // rendering). It used to be one DOM square per cell, and every animating square became its own
+  // GPU layer: ~180 on a phone, ~300 on a desktop, on every slide change.
   const tr = $('#transition');
   const trGrid = $('#transition-grid');
+  const trCtx = trGrid.getContext('2d');
   const trLabel = $('#transition-label');
   const trTitle = $('#transition-title');
+  const CELL_MS = 140; // each square grows in two steps over this time, as the CSS steps(2) transition did
   let cells = [];
   let gridCols = 0;
   let gridRows = 0;
+  let cellW = 0;
+  let cellH = 0;
+  let trColors = ['#6D1D17', '#661b15'];
 
   function buildTransitionGrid() {
     const size = mobile ? 44 : 72;
     const cols = Math.ceil(innerWidth / size);
     const rows = Math.ceil(innerHeight / size);
-    if (cols === gridCols && rows === gridRows) return;
-    gridCols = cols;
-    gridRows = rows;
-    trGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-    trGrid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-    trGrid.innerHTML = '';
-    cells = [];
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const d = document.createElement('i');
-        d.className = 'tb' + ((r + c) % 2 ? ' alt' : '');
-        trGrid.appendChild(d);
-        cells.push({ el: d, r, c });
+    trGrid.width = innerWidth;
+    trGrid.height = innerHeight;
+    cellW = innerWidth / cols;
+    cellH = innerHeight / rows;
+    if (cols !== gridCols || rows !== gridRows) {
+      gridCols = cols;
+      gridRows = rows;
+      cells = [];
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) cells.push({ r, c, d: 0 });
       }
     }
+    // Resizing a canvas clears it; a resize while the slide is covered must not uncover it.
+    paintCells(lastScaleOf);
+  }
+
+  // scaleOf(cell) → 0…1.04; squares overlap slightly at full size so no seams show.
+  let lastScaleOf = () => 0;
+  function paintCells(scaleOf) {
+    lastScaleOf = scaleOf;
+    trCtx.clearRect(0, 0, trGrid.width, trGrid.height);
+    for (let alt = 0; alt < 2; alt++) {
+      trCtx.fillStyle = trColors[alt];
+      for (const cell of cells) {
+        if ((cell.r + cell.c) % 2 !== alt) continue;
+        const k = scaleOf(cell);
+        if (k <= 0) continue;
+        const w = cellW * k;
+        const h = cellH * k;
+        const x = Math.floor((cell.c + 0.5) * cellW - w / 2);
+        const y = Math.floor((cell.r + 0.5) * cellH - h / 2);
+        trCtx.fillRect(x, y, Math.ceil(w) + 1, Math.ceil(h) + 1);
+      }
+    }
+  }
+
+  function wipe(covering) {
+    const from = covering ? 0 : 1.04;
+    const to = covering ? 1.04 : 0;
+    const end = cells.reduce((m, cell) => Math.max(m, cell.d), 0) + CELL_MS;
+    return new Promise((resolve) => {
+      let t0 = 0;
+      const frame = (now) => {
+        if (!t0) t0 = now;
+        const t = now - t0;
+        paintCells((cell) => {
+          const p = (t - cell.d) / CELL_MS;
+          return p <= 0 ? from : p >= 1 ? to : from + (to - from) * (Math.floor(p * 2) / 2);
+        });
+        if (t < end) requestAnimationFrame(frame);
+        else resolve();
+      };
+      requestAnimationFrame(frame);
+    });
   }
 
   function shade(hex, k) {
@@ -195,11 +249,12 @@
 
   function setDelays(dir, uncovering) {
     const span = gridCols + gridRows * 0.8;
-    cells.forEach(({ el, r, c }) => {
+    cells.forEach((cell) => {
+      const { r, c } = cell;
       let k = ((dir > 0 ? c : gridCols - 1 - c) + r * 0.8) / span;
       if (uncovering) k = 1 - k;
       const jitter = ((c * 7 + r * 13) % 5) * 9;
-      el.style.setProperty('--d', Math.round(k * 300 + jitter) + 'ms');
+      cell.d = Math.round(k * 300 + jitter);
     });
   }
 
@@ -229,16 +284,14 @@
   async function runTransition(target, dir, onCovered) {
     const slide = slides[target];
     const bg = slide.dataset.bg || '#6D1D17';
-    tr.style.setProperty('--c1', bg);
-    tr.style.setProperty('--c2', shade(bg, 0.9));
+    trColors = [bg, shade(bg, 0.9)];
     tr.dataset.theme = slide.dataset.theme;
     setTransitionText(target);
     setDelays(dir, false);
+    paintCells(() => 0);
     tr.classList.add('on');
-    void tr.offsetWidth;
-    tr.classList.add('cover');
     Audio.sfx('whoosh');
-    await wait(470);
+    await wipe(true);
     onCovered();
     tr.classList.add('text');
     Audio.sfx('blip');
@@ -246,8 +299,7 @@
     await wait(760);
     tr.classList.remove('text');
     setDelays(dir, true);
-    tr.classList.remove('cover');
-    await wait(440);
+    await wipe(false);
     tr.classList.remove('on');
   }
 
@@ -569,6 +621,8 @@
     }
     loop(now) {
       if (!this.on) return;
+      // Embers move in whole pixels, so 30 fps looks the same as 60 and halves the canvas uploads.
+      if (now - this.last < 30) { requestAnimationFrame(this.loop); return; }
       const dt = Math.min(0.05, (now - this.last) / 1000);
       this.last = now;
       const want = this.mode === 'stage' ? 26 : 34;

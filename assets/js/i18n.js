@@ -9,6 +9,8 @@ window.SANLAQ_I18N = {
     "nav.soundOff": "Дыбысты өшіру",
     "gate.loaded": "ЖҮКТЕЛДІ",
     "a11y.slide": "Слайд",
+    "s9.continueTouch": "БАС · ЖАЛҒАСТЫРУ",
+    "s14.hintTouch": "СУРЕТТІ БАС — НАҚТЫ ФОТО",
     fireIntro: "Көш алдындағы соңғы түн. Отқа жақын отырыңыз, әңгіме айтайын.",
     topics: [
       ["Әбілқайыр хан тұсында ру басылары арасында алауыздық көбейді.", "Елдің бір бөлігі Керей мен Жәнібекке еріп, Моғолстан шекарасына қарай көшті.", "Осы көш Қазақ хандығының бастауы болды деп айтылады."],
@@ -141,6 +143,7 @@ window.SANLAQ_I18N = {
     "s9.ask": "О ЧЁМ СПРОСИШЬ?",
     "s9.speaker": "АКСАКАЛ",
     "s9.continue": "КЛИК · ДАЛЕЕ",
+    "s9.continueTouch": "НАЖМИ · ДАЛЕЕ",
     "s9.sleep": "СПАТЬ · ДАЛЕЕ",
     "q1": "Почему народ кочует?",
     "q2": "Земля Жетысу",
@@ -201,6 +204,7 @@ window.SANLAQ_I18N = {
 
     "s14.title": "Команда",
     "s14.hint": "НАВЕДИ КУРСОР — НАСТОЯЩЕЕ ФОТО",
+    "s14.hintTouch": "НАЖМИ НА КАРТОЧКУ — НАСТОЯЩЕЕ ФОТО",
 
     "s15.eyebrow": "ИНВЕСТИЦИОННЫЙ ЗАПРОС",
     "s15.title": "Что нам нужно",
@@ -245,7 +249,7 @@ window.SANLAQ_I18N = {
     "cr.team": "Команда: Suyundik Aibek, Sapi Beknur, Yedil Nauryzbek, Nurdaulet Meiirbek.",
     "cr.art": "Арт, спрайты и скриншоты — из самой игры SAÑLAQ.",
     "cr.sound": "Музыка и звук — процедурный синтез из игры: домбра (Karplus-Strong) собирается прямо в браузере.",
-    "cr.fonts": "Шрифты: Handjet, Press Start 2P, Tiny5 — SIL Open Font License.",
+    "cr.fonts": "Шрифт: Greybeard — Uwe Waldmann, Andy Walker, лицензия MIT.",
     "cr.data": "Данные рынка: Overview of Games in Kazakhstan, GameDev Center Astana Hub. Исторические данные проходят проверку — игра на стадии MVP.",
 
     fireIntro: "Последняя ночь перед кочёвкой. Садитесь ближе к огню — расскажу историю.",
@@ -380,6 +384,7 @@ window.SANLAQ_I18N = {
     "s9.ask": "WHAT WILL YOU ASK?",
     "s9.speaker": "THE ELDER",
     "s9.continue": "CLICK · CONTINUE",
+    "s9.continueTouch": "TAP · CONTINUE",
     "s9.sleep": "GO TO SLEEP · NEXT",
     "q1": "Why are we leaving?",
     "q2": "The land of Zhetysu",
@@ -440,6 +445,7 @@ window.SANLAQ_I18N = {
 
     "s14.title": "Team",
     "s14.hint": "HOVER TO SEE THE REAL PHOTO",
+    "s14.hintTouch": "TAP A CARD TO SEE THE REAL PHOTO",
 
     "s15.eyebrow": "INVESTMENT ASK",
     "s15.title": "What we need",
@@ -484,7 +490,7 @@ window.SANLAQ_I18N = {
     "cr.team": "Team: Suyundik Aibek, Sapi Beknur, Yedil Nauryzbek, Nurdaulet Meiirbek.",
     "cr.art": "Art, sprites and screenshots come from the SAÑLAQ game itself.",
     "cr.sound": "Music and sound are the game’s procedural synth: a dombra (Karplus-Strong) built live in your browser.",
-    "cr.fonts": "Fonts: Handjet, Press Start 2P, Tiny5 — SIL Open Font License.",
+    "cr.fonts": "Font: Greybeard by Uwe Waldmann and Andy Walker, MIT License.",
     "cr.data": "Market data: Overview of Games in Kazakhstan, GameDev Center Astana Hub. Historical content is under review — the game is at MVP stage.",
 
     fireIntro: "The last night before the migration. Sit closer to the fire and I’ll tell you a story.",
