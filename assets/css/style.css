@@ -573,8 +573,17 @@ body.is-mobile[data-theme="light"] .lang--top button:not(.on) { background: var(
 .is-mobile .cover__tag { font-size: 24px; }
 .is-mobile .cover__row { flex-direction: column; gap: 22px; }
 .is-mobile .badge { height: auto; padding: 10px 12px; font-size: 8px; }
-.is-mobile .walkers { height: 80px; }
+/* Pinned to the bottom of the first screen, the walkers scrolled up over the role cards.
+ * On phones they get their own strip at the end of the cover column, above the navbar. */
+.is-mobile .s-cover .stage { padding-bottom: calc(var(--nav) + 116px); }
+.is-mobile .walkers { position: relative; bottom: auto; height: 80px; margin-top: calc(-88px - var(--nav)); }
 .is-mobile .walker { width: 48px; height: 80px; }
+/* The navbar is solid on phones; this band would scroll up over the content. */
+.is-mobile .s-cover::after, .is-mobile .s-join::after { display: none; }
+/* The steppe layer only spans the first screen; drawn on the slide itself with `local` it spans the whole column. */
+.is-mobile .s-cover, .is-mobile .s-join { --veil: rgba(53, 23, 19, .25); background: linear-gradient(var(--veil), var(--veil)), url(../img/bg-steppe.webp) center / cover no-repeat; background-attachment: local; }
+.is-mobile .s-join { --veil: rgba(53, 23, 19, .55); }
+.is-mobile .s-cover > .bgimg, .is-mobile .s-cover > .veil, .is-mobile .s-join > .bgimg, .is-mobile .s-join > .veil { display: none; }
 .is-mobile .s-cover .stage, .is-mobile .s-join .stage { justify-content: center; }
 
 /* problem */
